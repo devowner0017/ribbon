@@ -1,8 +1,8 @@
 <script setup></script>
 
 <template>
-  <div class="menu-bar font-small-caps">
-    <div class="btn-back">
+  <div class="menu-bar font-small-caps absolute">
+    <a class="btn-back" v-on:click="goBack">
       <svg
         width="16"
         height="16"
@@ -18,8 +18,8 @@
         />
       </svg>
       <span>Back</span>
-    </div>
-    <div class="btn-start">
+    </a>
+    <a class="btn-start" href="/questions/1">
       <svg
         width="16"
         height="16"
@@ -35,7 +35,7 @@
         />
       </svg>
       <span>Start Over</span>
-    </div>
+    </a>
   </div>
 </template>
 
@@ -84,3 +84,13 @@
   }
 }
 </style>
+
+<script>
+  export default {
+    methods: {
+        goBack() {
+            this.$router.go(-1);
+        }
+    },
+  }
+</script>
