@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { Question_One, Question_Two, Question_Three, Question_Four } from '../views/question'
+import { Question_One, Question_Two, Question_Three, Question_Four, Question_Four_Continue } from '../views/question';
 import Upbeat from '../views/question/Upbeat.vue';
 import Home from '../views/Home.vue';
-import Generate from '../views/Generate.vue'
-import Four_continue from '../views/question/Four_continue.vue';
+import Generate from '../views/Generate.vue';
 import Done from '../views/Done.vue';
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   mode: 'history',
@@ -26,6 +26,11 @@ const router = createRouter({
       component: Question_Two
     },
     {
+      path: '/questions/3/upbeat',
+      name: 'upbeat',
+      component: Upbeat,
+    },
+    {
       path: '/questions/3',
       name: 'question3',
       component: Question_Three
@@ -36,22 +41,17 @@ const router = createRouter({
       component: Question_Four
     },
     {
-      path: '/questions/3/upbeat',
-      name: 'upbeat',
-      component: Upbeat,
-    },
-    {
       path: '/questions/4/continue',
-      name: 'continue',
-      component: Four_continue
+      name: 'questionfourcontinue',
+      component: Question_Four_Continue
     },
     {
-      path: '/questions/generate/',
-      name: 'Generate',
+      path: '/generate',
+      name: 'generate',
       component: Generate
     },
     {
-      path: '/questions/generate/finish',
+      path: '/done',
       name: 'done',
       component: Done
     }

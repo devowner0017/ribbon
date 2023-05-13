@@ -2,22 +2,21 @@
     <div class="flex flex-col grow">
         <MenuBar />
         <div class="flex flex-col grow justify-center items-center">
-            <div class="form-content form-content-sm">
-                <div class="text-main-content mb-4 w-full">
-                    <dvi class="thanks">
-                        Thanks
-                    </dvi>
-                    <div> For more tools like these, check out Ribbon. Ribbons is
-                        this first student CRM platform built for online adult education providera treamline operation and
-                        improve student retention.</div>
-
+            <div class="form-content">
+                <div  class="thanks">
+                    Thanks
                 </div>
-                <div class="flex flex-col justify-center">
-                    <Button class="btn-primary mb-2">
-                        Book a demo
+                <div class="text-main-content mb-4 w-full">                       
+                    For more tools like these, check out Ribbon. Ribbons is
+                    this first student CRM platform built for online adult education providera treamline operation and
+                    improve student retention.
+                </div>
+                <div class="grid grid-cols-2 w-full">
+                    <Button class="btn-primary ">
+                       Book a demo
                     </Button>
-                    <Button class="btn-secondary">
-                        about ribbon
+                    <Button class=" btn-secondary">
+                       about ribbon
                     </Button>
                 </div>
             </div>
@@ -32,7 +31,7 @@ export default {
         MenuBar,
         Button
     },
-    name: 'Second Question',
+    name: 'done',
     methods: {
         redirectToPage() {
             this.$router.push('/questions/3');
@@ -41,3 +40,5 @@ export default {
 
 }
 </script>
+
+

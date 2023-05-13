@@ -65,7 +65,7 @@ export default {
         Paper,
         ShareButton
     },
-    name: 'Second Question',
+    name: 'four-question',
     methods: {
         onNextPage() {
             this.$router.push('/questions/4/continue')

@@ -4,14 +4,14 @@
         <div class="w-full flex grow grid md:grid-cols-2 sm:gird-cols-1 ">
             <div class="md:flex flex-col grow w-full justify-center items-center hidden">
                 <div class="form-content form-content-md form-content-sd form-content-sm">
-                    <div class="text-main-content mb-4 w-full">Here are 3additional drafts.
-                    </div>
+                    <div class="text-main-content mb-4 px-2">Here are <span class="text-primary-content">3 additional drafts.</span>
+                </div>
                     <div class=" grid grid-cols-3">
                         <ToggleCard text="DRAFT #4" />
                         <ToggleCard text="DRAFT #5" />
                         <ToggleCard text="DRAFT #6" />
                     </div>
-                    <div class="flex flex-row w-full">
+                    <div class="flex flex-row w-full px-1">
                         <Button class="btn-primary  mt-1 w-full" :onClick="onNextPage">finish</Button>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
         </div>
         <div class=" md:hidden sm:block w-full fixed bottom-0 ">
             <div class="flex justify-end">
-                <ShareButton class="share-btn-sm mb-6 mr-6" >
+                <ShareButton class="share-btn-sm mb-6 mr-6" :onCick="onClickShare">
                     <div class="flex">
                         <img src="/images/messageBox.svg" class="mr-2" alt="share" /> SHARE
                     </div>
@@ -30,14 +30,14 @@
             </div>
 
             <div class="sm-tool-bar ">
-                <div class="text-main-content mb-4">Here are 3additional drafts.
+                <div class="text-main-content mb-4 px-2">Here are <span class="text-primary-content">3 additional drafts.</span>
                 </div>
                 <div class="grid w-full grid-cols-3">
                     <ToggleCard text="DRAFT #4" />
                     <ToggleCard text="DRAFT #5" />
                     <ToggleCard text="DRAFT #6" />
                 </div>
-                <div class="flex flex-row w-full">
+                <div class="flex flex-row w-full px-1">
                     <Button class="btn-primary  mt-1 w-full" :onClick="onNextPage">finish</Button>
                 </div>
             </div>
@@ -59,7 +59,7 @@ export default {
         Paper,
         ShareButton
     },
-    name: 'Second Question',
+    name: 'generate',
     data() {
         return {
             isModalVisible: false,
@@ -67,8 +67,11 @@ export default {
     },
     methods: {
         onNextPage() {
-            this.$router.push('/questions/generate/finish')
+            this.$router.push('/done')
         },
+        onClickShare() {
+            this.isModalVisible=true;
+        }
     }
 }
 </script>

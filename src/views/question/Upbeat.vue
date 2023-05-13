@@ -7,7 +7,7 @@
                     <div class="text-main-content mb-4 w-full">The draft is now more upbeat:
                     </div>
                     <div class="flex flex-col justify-center">
-                        <Button class="btn-primary mb-2" :onClick="onNextpage">
+                        <Button class="btn-primary mb-2"  :onClick="onNextPage">
                             Next: personalize more
                         </Button>
                         <Button class="btn-secondary">
@@ -34,8 +34,8 @@
                 </div>
                 <div class="grid w-full grid-cols-1">
                     <div class="flex flex-col justify-center">
-                        <Button class="btn-primary mb-2" :onClick="onNextpage">
-                            Next: personalize more
+                        <Button class="btn-primary mb-2" :onClick="onNextPage">
+                            Next: personalize m
                         </Button>
                         <Button class="btn-secondary">
                             choose a different tone
@@ -61,7 +61,8 @@ export default {
     },
     name: 'Second Question',
     methods: {
-        onNextpage() {
+        onNextPage() {
+            console.log('ok');
             this.$router.push('/questions/4')
         }
     }
