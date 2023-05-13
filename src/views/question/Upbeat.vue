@@ -7,7 +7,7 @@
                     <div class="text-main-content mb-4 w-full">The draft is now more upbeat:
                     </div>
                     <div class="flex flex-col justify-center">
-                        <Button class="btn-primary mb-2" :onClick="onNextPage">
+                        <Button class="btn-primary mb-2" :onClick="onNextpage">
                             Next: personalize more
                         </Button>
                         <Button class="btn-secondary">
@@ -34,7 +34,7 @@
                 </div>
                 <div class="grid w-full grid-cols-1">
                     <div class="flex flex-col justify-center">
-                        <Button class="btn-primary mb-2">
+                        <Button class="btn-primary mb-2" :onClick="onNextpage">
                             Next: personalize more
                         </Button>
                         <Button class="btn-secondary">
@@ -61,7 +61,7 @@ export default {
     },
     name: 'Second Question',
     methods: {
-        onNextPage() {
+        onNextpage() {
             this.$router.push('/questions/4')
         }
     }
