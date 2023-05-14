@@ -4,14 +4,14 @@
         <div class="w-full flex grow grid md:grid-cols-2 sm:gird-cols-1 ">
             <div class="md:flex flex-col grow w-full justify-center items-center hidden">
                 <div class="form-content form-content-md form-content-sd form-content-sm">
-                    <div class="text-main-content mb-4 w-full">The draft is now more upbeat:
+                    <div class="text-main-content mb-4 w-full">The messaging has been updated for a leaner who hold a jobs and had recent travel.
                     </div>
                     <div class="flex flex-col justify-center">
-                        <Button class="btn-primary mb-2" :onClick="onNextpage">
-                            Next: personalize more
+                        <Button class="btn-primary mb-2" :onClick="onNextPage">
+                            Next: See more drafts
                         </Button>
                         <Button class="btn-secondary">
-                            choose a different tone
+                            update learner details
                         </Button>
                     </div>
                 </div>
@@ -30,15 +30,15 @@
             </div>
           
             <div class="sm-tool-bar ">
-                <div class="text-main-content mb-4">The draft is now more upbeat:
+                <div class="text-main-content mb-4">he messaging has been updated for a leaner who hold a jobs and had recent travel.
                 </div>
                 <div class="grid w-full grid-cols-1">
                     <div class="flex flex-col justify-center">
-                        <Button class="btn-primary mb-2" :onClick="onNextpage">
-                            Next: personalize more
+                        <Button class="btn-primary mb-2" >
+                            Next: See more drafts
                         </Button>
                         <Button class="btn-secondary">
-                            choose a different tone
+                            update learner details
                         </Button>
                     </div>
                 </div>
@@ -61,8 +61,8 @@ export default {
     },
     name: 'Second Question',
     methods: {
-        onNextpage() {
-            this.$router.push('/questions/4')
+        onNextPage() {
+            this.$router.push('/questions/generate')
         }
     }
 }

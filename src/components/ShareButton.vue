@@ -4,7 +4,6 @@
     </button>
 </template>
 <script>
-
 export default {
     name: "ShareButton",
     props: {
@@ -27,7 +26,7 @@ export default {
         Class() {
             return "share-btn " + this.class;
         }
-    },
+    }
 }
 </script>
 <style scoped lang="scss">
