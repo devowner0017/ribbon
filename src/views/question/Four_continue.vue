@@ -10,7 +10,7 @@
                         <Button class="btn-primary mb-2" :onClick="onNextPage">
                             Next: See more drafts
                         </Button>
-                        <Button class="btn-secondary">
+                        <Button class="btn-secondary" :onClick="onNextPage">
                             update learner details
                         </Button>
                     </div>
@@ -34,10 +34,10 @@
                 </div>
                 <div class="grid w-full grid-cols-1">
                     <div class="flex flex-col justify-center">
-                        <Button class="btn-primary mb-2" >
+                        <Button class="btn-primary mb-2" :onClick="onNextPage">
                             Next: See more drafts
                         </Button>
-                        <Button class="btn-secondary">
+                        <Button class="btn-secondary" :onClick="onNextPage">
                             update learner details
                         </Button>
                     </div>
@@ -59,11 +59,12 @@ export default {
         Paper,
         ShareButton
     },
-    name: 'Second Question',
+    name: 'Four Question',
     methods: {
         onNextPage() {
-            this.$router.push('/questions/generate')
+            this.$router.push('/generate')
         }
+        
     }
 }
 </script>

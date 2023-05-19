@@ -1,5 +1,5 @@
 <template>
-    <button :class="Class">
+    <button :class="Class" >
         <slot></slot>
     </button>
 </template>
@@ -10,11 +10,11 @@ export default {
         class: {
             type: String,
             default: "",
-        }
+        },
     },
     computed: {
         Class() {
-            return "btn btn-md btn-sd btn-sm " + this.class;
+            return "btn " + this.class;
         }
     }
 
@@ -22,4 +22,5 @@ export default {
 </script>
 <style scoped lang="scss">
 @import "@/assets/styles/main.scss";
+
 </style>

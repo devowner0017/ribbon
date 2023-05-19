@@ -2,22 +2,22 @@
     <div class="flex flex-col grow">
         <MenuBar />
         <div class="w-full flex grow grid md:grid-cols-2 sm:gird-cols-1 ">
-            <div class="md:flex flex-col grow w-full justify-center items-center hidden">
+            <div class=" md:flex flex-col grow w-full justify-center items-center hidden">
                 <div class="form-content form-content-md form-content-sd form-content-sm">
-                    <div class="text-main-content mb-4 w-full">The draft is now more upbeat:
+                    <div class="text-main-content mb-4 w-full">The draft is now more {{ mode }}:
                     </div>
                     <div class="flex flex-col justify-center">
                         <Button class="btn-primary mb-2"  :onClick="onNextPage">
                             Next: personalize more
                         </Button>
-                        <Button class="btn-secondary">
+                        <Button class="btn-secondary" :onClick="chooseDifferentTone">
                             choose a different tone
                         </Button>
                     </div>
                 </div>
             </div>
             <div class="primary-panel primary-panel-sd primary-panel-sm">
-                <Paper />
+                <Paper :content="draft" draftNum="2" :mode="mode"/>
             </div>
         </div>
         <div class=" md:hidden sm:block w-full fixed bottom-0 ">
@@ -30,14 +30,14 @@
             </div>
           
             <div class="sm-tool-bar ">
-                <div class="text-main-content mb-4">The draft is now more upbeat:
+                <div class="text-main-content mb-4">The draft is now more {{ mode }}:
                 </div>
                 <div class="grid w-full grid-cols-1">
                     <div class="flex flex-col justify-center">
                         <Button class="btn-primary mb-2" :onClick="onNextPage">
                             Next: personalize m
                         </Button>
-                        <Button class="btn-secondary">
+                        <Button class="btn-secondary"  :onClick="chooseDifferentTone">
                             choose a different tone
                         </Button>
                     </div>
@@ -62,9 +62,19 @@ export default {
     name: 'Second Question',
     methods: {
         onNextPage() {
-            console.log('ok');
             this.$router.push('/questions/4')
+        },
+        chooseDifferentTone() {
+            this.$router.push('/questions/3');
         }
-    }
+    },
+    computed: {
+        draft() {
+            return this.$store.state.draft2;
+        },
+        mode() {
+            return this.$route.params.question;
+        }
+    },
 }
 </script>
