@@ -10,11 +10,6 @@
                     ◦more <b>{{ mode }}</b>
                 </span>
             </div>
-            <div class="mb-3">
-                <b>
-                    Subject: {{subject}}<br />
-                </b>
-            </div>
             {{
                 this.content
             }}
