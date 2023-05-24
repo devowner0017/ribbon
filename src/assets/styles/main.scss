@@ -183,7 +183,7 @@
 
 //define text input
 .input-text {
-  border: 1px solid #d2caca;
+  border: 2px solid #d2caca;
   border-radius: 8px;
   color: black;
   font-family: $fontFamily;
@@ -197,7 +197,7 @@
   }
 
   &:hover {
-    border: 1px solid #212121;
+    border: 2px solid #212121;
   }
 
   &:hover::placeholder {
@@ -205,7 +205,7 @@
   }
 
   &:focus-visible {
-    border: 1px solid $primaryColor;
+    border: 2px solid $primaryColor;
     outline: none;
   }
 }
@@ -527,21 +527,16 @@
 }
 
 .share-btn {
-  padding: 18px 16px;
-  width: 148px;
+  padding: 24px;
+  width: 80px;
+  height: 80px;
   background: $primaryColor;
-  border: 6px solid $whiteColor;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
   border-radius: 72px;
-  font-family: $fontFamily;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 20px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
   color: $whiteColor;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .sm-tool-bar {
@@ -675,7 +670,9 @@
   }
 
   .share-btn-sm {
-    border:0px;
+    width: 56px;
+    height: 56px;
+    padding: 12px;
   }
 }
 

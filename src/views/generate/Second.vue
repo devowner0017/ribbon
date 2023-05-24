@@ -11,7 +11,7 @@
                     </div>
                     <div class="flex flex-col justify-center items-center">
                         <textarea class="text-area w-full" maxlength="500" v-model="question2"
-                            placeholder="Book a meeting with me so we can figure out what’s going on. My calendly link is https://calendly.com/ribboneducation/15-min-chat|"></textarea>
+                            placeholder="Book a meeting with me so we can figure out what’s going on."></textarea>
                         <p v-if="question2.length > 500" class="mt-2" style="color: red;">Limit text to 500 characters.</p>
                         <Button class="btn-primary mt-4" :onClick="draftClick" :disabled="isDisabled">
                             draft email

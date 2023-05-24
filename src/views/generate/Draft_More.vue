@@ -25,11 +25,7 @@
         </div>
         <div class=" md:hidden sm:block w-full fixed bottom-0 ">
             <div v-if="!isGenerating" class="flex justify-end">
-                <ShareButton class="share-btn-sm mb-6 mr-6" :onCick="onClickShare">
-                    <div class="flex">
-                        <img src="/images/messageBox.svg" class="mr-2" alt="share" /> SHARE
-                    </div>
-                </ShareButton>
+                <ShareButton class="share-btn-sm mb-6 mr-6" :onCick="onClickShare"></ShareButton>
             </div>
 
             <div class="sm-tool-bar ">
@@ -107,8 +103,8 @@ export default {
         generateAnswer(PROMPT_FOUR(this.$store.state.draft3)).then(res => {
             let part = res.split('$');
             this.$store.dispatch('setDraft4', part[0]);
-            this.$store.dispatch('setDraft5', part[1]);
-            this.$store.dispatch('setDraft6', part[2]);
+            this.$store.dispatch('setDraft5', part[1].substring(2));
+            this.$store.dispatch('setDraft6', part[2].substring(2));
             this.selected_draft = part[0];
             this.isGenerating = false;
             // generateAnswer(`${Query2}`).then(res => {

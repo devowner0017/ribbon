@@ -1,12 +1,20 @@
 <template>
     <button :class="Class" @click="openModal">
-        <slot></slot>
+        <img src="/images/messageBox.svg" alt="share" />
     </button>
-    <EmailInputModal :showModal="isModalVisible" @close="closeModal"></EmailInputModal>
+    <Modal :showModal="isModalVisible" @close="closeModal" title="Send yourself this draft">
+        <InputGroup placeHolder="First and last name" title="Name"/>
+        <InputGroup placeHolder="Enter your email address" title="Email"/>
+        <div class="d-flex mt-5">
+            <button type="button" class="btn btn-primary btn-sm w-full" @click="shareDraft" disabled>Confirm</button>
+        </div>
+    </Modal>
+    <!-- <EmailInputModal :showModal="isModalVisible" @close="closeModal"></EmailInputModal> -->
 </template>
 <script>
 import EmailInputModal from './utils/EmailInputModal.vue';
-
+import Modal from './utils/Modal.vue';
+import InputGroup from './InputGroup.vue';
 export default {
     name: "ShareButton",
     props: {
@@ -33,7 +41,7 @@ export default {
             return "share-btn " + this.class;
         }
     },
-    components: { EmailInputModal }
+    components: { EmailInputModal, Modal, InputGroup }
 }
 </script>
 <style scoped lang="scss">

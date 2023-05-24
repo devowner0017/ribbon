@@ -34,11 +34,7 @@
         </div>
         <div class=" md:hidden sm:block w-full fixed bottom-0 ">
             <div class="flex justify-end">
-                <ShareButton v-if="!isGenerating" class="share-btn-sm mb-6 mr-6">
-                    <div class="flex">
-                        <img src="/images/messageBox.svg" class="mr-2" alt="share" /> SHARE
-                    </div>
-                </ShareButton>
+                <ShareButton v-if="!isGenerating" class="share-btn-sm mb-6 mr-6"></ShareButton>
             </div>
 
             <div class="sm-tool-bar ">
