@@ -5,7 +5,7 @@
                 <ToggleCard text="missed assignments" @click="redierctToPageTwo(missed_assignments)" />
                 <ToggleCard text="been absent from class"  @click="redierctToPageTwo(been_absent_from_class)" />
                 <ToggleCard text="been late to class"  @click="redierctToPageTwo(been_late_to_class)" />
-                <ToggleCard text="a concering grade"   @click="redierctToPageTwo(a_concering_grade)"/>
+                <ToggleCard text="a concerning grade"   @click="redierctToPageTwo(a_concering_grade)"/>
             </div>
         </div>
 </template>

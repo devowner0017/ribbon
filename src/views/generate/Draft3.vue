@@ -11,13 +11,10 @@
                         <Button class="btn-primary mb-2" :onClick="onNextPage">
                             Next: See more drafts
                         </Button>
-                        <Button class="btn-secondary" :onClick="updateLeD">
-                            update learner details
-                        </Button>
                     </div>
                 </div>
             </div>
-            <div class="primary-panel primary-panel-sd primary-panel-sm">
+            <div class="primary-panel primary-panel-md primary-panel-sd primary-panel-sm">
                 <Paper :content="draft" draftNum="3" :mode="mode" :subject="subject" />
             </div>
         </div>
@@ -34,9 +31,6 @@
                     <div class="flex flex-col justify-center">
                         <Button class="btn-primary mb-2" :onClick="onNextPage">
                             Next: See more drafts
-                        </Button>
-                        <Button class="btn-secondary" :onClick="updateLeD">
-                            update learner details
                         </Button>
                     </div>
                 </div>

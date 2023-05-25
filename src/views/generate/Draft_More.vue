@@ -8,17 +8,17 @@
                             drafts.</span>
                     </div>
                     <div class=" grid grid-cols-3">
-                        <ToggleCard text="DRAFT #4" @click="onSelectDraft('4')" />
-                        <ToggleCard text="DRAFT #5" @click="onSelectDraft('5')" />
-                        <ToggleCard text="DRAFT #6" @click="onSelectDraft('6')" />
+                        <ToggleCard text="OPTION A" @click="onSelectDraft('4')" />
+                        <ToggleCard text="OPTION B" @click="onSelectDraft('5')" />
+                        <ToggleCard text="OPTION C" @click="onSelectDraft('6')" />
                     </div>
                     <div class="flex flex-row w-full px-1">
-                        <Button class="btn-primary  mt-1 w-full" :onClick="onNextPage">finish</Button>
+                        <Button class="btn-primary  mt-1 w-full" :onClick="onNextPage">select</Button>
                     </div>
                 </div>
                 <DisablePanel v-if="isGenerating" />
             </div>
-            <div v-if="!isGenerating" class="primary-panel primary-panel-sd primary-panel-sm">
+            <div v-if="!isGenerating" class="primary-panel primary-panel-md primary-panel-sd primary-panel-sm">
                 <Paper :content="selected_draft" :draftNum="selected_id" />
             </div>
             <LoadingPanel v-if="isGenerating" />
@@ -33,12 +33,12 @@
                         drafts.</span>
                 </div>
                 <div class="grid w-full grid-cols-3">
-                    <ToggleCard text="DRAFT #4" @click="onSelectDraft('4')" />
-                    <ToggleCard text="DRAFT #5" @click="onSelectDraft('5')" />
-                    <ToggleCard text="DRAFT #6" @click="onSelectDraft('6')" />
+                    <ToggleCard text="OPTION A" @click="onSelectDraft('4')" />
+                    <ToggleCard text="OPTION B" @click="onSelectDraft('5')" />
+                    <ToggleCard text="OPTION C" @click="onSelectDraft('6')" />
                 </div>
                 <div class="flex flex-row w-full px-1">
-                    <Button class="btn-primary  mt-1 w-full" :onClick="onNextPage">finish</Button>
+                    <Button class="btn-primary  mt-1 w-full" :onClick="onNextPage">select</Button>
                 </div>
             </div>
             <DisablePanel v-if="isGenerating" />

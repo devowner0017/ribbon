@@ -5,7 +5,7 @@
     <Modal :showModal="isModalVisible" @close="closeModal" title="Send yourself this draft">
         <InputGroup placeHolder="First and last name" title="Name"/>
         <InputGroup placeHolder="Enter your email address" title="Email"/>
-        <div class="d-flex mt-5">
+        <div class="d-flex mt-">
             <button type="button" class="btn btn-primary btn-sm w-full" @click="shareDraft" disabled>Confirm</button>
         </div>
     </Modal>

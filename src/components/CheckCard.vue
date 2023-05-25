@@ -1,6 +1,6 @@
 <template>
-    <button :class="['check-card flex',]">
-        <div :class="['card card-sm',  {'selected' : isSelected}]"  >
+    <button :class="['check-card flex h-full',]">
+        <div :class="['card card-sm h-full',  {'selected' : isSelected}]"  >
             <span>{{ text }}</span>
         </div>
     </button>

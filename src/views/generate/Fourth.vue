@@ -4,7 +4,8 @@
         <div class="w-full flex grow grid md:grid-cols-2 sm:gird-cols-1 ">
             <div class="relative md:flex flex-col grow w-full justify-center items-center hidden">
                 <div class="form-content form-content-md form-content-sd form-content-sm">
-                    <div class="text-main-content mb-4 w-full">How is this? Would you like it more:
+                    <div class="text-main-content mb-4 w-full">Want to personalize this further? Select any that apply to
+                        this Learner:
                     </div>
                     <div class=" grid grid-cols-2">
                         <CheckCard text="holds a job" :isSelected="selected.includes('holds a job')"
@@ -27,8 +28,8 @@
                     <DisablePanel v-if="isGenerating" />
                 </div>
             </div>
-            <div v-if="!isGenerating" class="primary-panel primary-panel-sd primary-panel-sm">
-                <Paper :content="draft" draftNum="3" :mode="mode" :subject="subject"/>
+            <div v-if="!isGenerating" class="primary-panel primary-panel-md primary-panel-sd primary-panel-sm">
+                <Paper :content="draft" draftNum="3" :mode="mode" :subject="subject" />
             </div>
             <LoadingPanel v-if="isGenerating" />
         </div>
@@ -38,21 +39,25 @@
             </div>
 
             <div class="sm-tool-bar ">
-                <div class="text-main-content mb-4">How is this? Would you like it more:
+                <div class="text-main-content mb-4">Want to personalize this further? Select any that apply to this Learner:
                 </div>
-                <div class="grid w-full grid-cols-3">
-                    <CheckCard text="holds a job" :isSelected="selected.includes(hold_a_job)"
-                        :disabled="otherCardDisabled" @click="select(hold_a_job)" />
-                    <CheckCard text="caretaker" :isSelected="selected.includes(caretaker)" :disabled="otherCardDisabled"
-                        @click="select(caretaker)" />
-                    <CheckCard text="recent illness" :isSelected="selected.includes(recent_illness)"
-                        :disabled="otherCardDisabled" @click="select(recent_illness)" />
-                    <CheckCard text="recent travel" :isSelected="selected.includes(recent_travel)"
-                        :disabled="otherCardDisabled" @click="select(recent_travel)" />
-                    <CheckCard text="Took time off" :isSelected="selected.includes(took_time_off)"
-                        :disabled="otherCardDisabled" @click="select(took_time_off)" />
-                    <CheckCard text="none apply" :isSelected="selected.includes('none apply')" :disabled="noApplyDisabled"
-                        @click="select('none apply')" />
+                <div class="grid w-full grid-cols-1">
+                    <div class="grid w-fill grid-cols-3">
+                        <CheckCard text="holds a job" :isSelected="selected.includes(hold_a_job)"
+                            :disabled="otherCardDisabled" @click="select(hold_a_job)" />
+                        <CheckCard text="caretaker" :isSelected="selected.includes(caretaker)" :disabled="otherCardDisabled"
+                            @click="select(caretaker)" />
+                        <CheckCard text="recent illness" :isSelected="selected.includes(recent_illness)"
+                            :disabled="otherCardDisabled" @click="select(recent_illness)" />
+                    </div>
+                    <div class="grid w-full grid-cols-3">
+                        <CheckCard text="recent travel" :isSelected="selected.includes(recent_travel)"
+                            :disabled="otherCardDisabled" @click="select(recent_travel)" />
+                        <CheckCard text="Took time off" :isSelected="selected.includes(took_time_off)"
+                            :disabled="otherCardDisabled" @click="select(took_time_off)" />
+                        <CheckCard text="none apply" :isSelected="selected.includes('none apply')"
+                            :disabled="noApplyDisabled" @click="select('none apply')" />
+                    </div>
                 </div>
                 <div class="flex flex-row w-full">
                     <Button class="btn-primary  mt-1 w-full" :onClick="makeDraft3"
@@ -60,7 +65,7 @@
                 </div>
                 <DisablePanel v-if="isGenerating" />
             </div>
-           
+
         </div>
 
     </div>
@@ -111,9 +116,9 @@ export default {
         makeDraft3() {
             this.isGenerating = true;
             if (this.noApplyDisabled) {
-                const prompt = PROMPT_THREE( this.$store.state.draft2 ,this.selected);
-                let _selected="";
-                this.selected.forEach( item => _selected +=item);
+                const prompt = PROMPT_THREE(this.$store.state.draft2, this.selected);
+                let _selected = "";
+                this.selected.forEach(item => _selected += item);
                 this.answer = generateAnswer(`${prompt}`).then(res => {
                     this.isGenerating = false;
                     this.$store.dispatch('setDraft3', res);
