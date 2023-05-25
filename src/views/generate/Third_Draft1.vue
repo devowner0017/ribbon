@@ -16,7 +16,7 @@
                 </div>
                 <DisablePanel v-if="isGenerating" />
             </div>
-            <div v-if="!isGenerating" class="primary-panel primary-panel-sd primary-panel-sm">
+            <div v-if="!isGenerating" class="primary-panel primary-panel-md primary-panel-sd primary-panel-sm">
                 <Paper :content="draft" draftNum="1" :subject="subject" />
             </div>
             <LoadingPanel v-if="isGenerating" />

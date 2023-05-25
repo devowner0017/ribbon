@@ -9,6 +9,10 @@
   align-items: center;
 }
 
+.text-color-primary {
+  color: $primaryColor;
+}
+
 .text-main-content {
   font-family: 'Outfit';
   font-style: normal;
@@ -24,8 +28,6 @@
   font-weight: 700;
   font-size: 20px;
   line-height: 28px;
-
-
   color: #6558F5;
 }
 .text-small-content {
@@ -452,7 +454,12 @@
   }
   .selected {
     background-color: $primaryColor700;
-    color: $whiteColor,
+    color: $whiteColor;
+    &:hover {
+      border: 1px solid $primaryColor!important;
+      background-color: $primaryColor700;
+      color: $whiteColor;
+    }
   }
 }
 
@@ -597,9 +604,12 @@
   }
 
   .form-content-md {
-    width: 430px;
+    width: 380px;
   }
 
+  .primary-panel-md {
+    padding: 29px 30px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -666,7 +676,7 @@
   }
 
   .paper-text-sm {
-    padding: 64px 24px;
+    padding: 64px 24px 210px 24px;
   }
 
   .share-btn-sm {

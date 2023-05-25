@@ -4,19 +4,16 @@
         <div class="w-full flex grow grid md:grid-cols-2 sm:gird-cols-1 ">
             <div class=" md:flex flex-col grow w-full justify-center items-center hidden">
                 <div class="form-content form-content-md form-content-sd form-content-sm">
-                    <div class="text-main-content mb-4 w-full">The draft is now more {{ mode }}:
+                    <div v-if="mode!=='looks_good'" class="text-main-content mb-4 w-full">The draft is now more <b class="text-color-primary">{{ mode }}.</b>
                     </div>
                     <div class="flex flex-col justify-center">
                         <Button class="btn-primary mb-2"  :onClick="onNextPage">
-                            Next: personalize more
-                        </Button>
-                        <Button class="btn-secondary" :onClick="chooseDifferentTone">
-                            choose a different tone
+                            Next: personalize some more
                         </Button>
                     </div>
                 </div>
             </div>
-            <div class="primary-panel primary-panel-sd primary-panel-sm">
+            <div class="primary-panel primary-panel-md primary-panel-sd primary-panel-sm">
                 <Paper :content="draft" draftNum="2" :subject="subject" :mode="mode"/>
             </div>
         </div>
@@ -26,15 +23,12 @@
             </div>
           
             <div class="sm-tool-bar ">
-                <div class="text-main-content mb-4">The draft is now more {{ mode }}:
+                <div v-if="mode!=='looks_good'"  class="text-main-content mb-4">The draft is now more <b class="text-color-primary">{{ mode }}.</b>
                 </div>
                 <div class="grid w-full grid-cols-1">
                     <div class="flex flex-col justify-center">
                         <Button class="btn-primary mb-2" :onClick="onNextPage">
-                            Next: personalize m
-                        </Button>
-                        <Button class="btn-secondary"  :onClick="chooseDifferentTone">
-                            choose a different tone
+                            Next: personalize Some More
                         </Button>
                     </div>
                 </div>

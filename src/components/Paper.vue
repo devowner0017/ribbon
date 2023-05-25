@@ -7,7 +7,7 @@
                     Draft #{{ draftNum }}
                 </b><br/>
                 <span v-if="mode.length>0">
-                    ◦more <b>{{ mode }}</b>
+                    more <b v-if="mode!=='looks_good'" class="text-color-primary">{{ mode }}</b>
                 </span>
             </div>
             {{
