@@ -118,7 +118,17 @@ export default {
             if (this.noApplyDisabled) {
                 const prompt = PROMPT_THREE(this.$store.state.draft2, this.selected);
                 let _selected = "";
-                this.selected.forEach(item => _selected += item);
+                for(let i = 0; i < this.selected.length; i++) {
+                    if(this.selected.length < 2) {
+                        _selected +=this.selected[i];
+                    } else {
+                        if( i < this.selected.length - 1) {
+                            _selected +=this.selected[i] + ", "
+                        } else {
+                            _selected +=this.selected[i];
+                        }
+                    }
+                }
                 this.answer = generateAnswer(`${prompt}`).then(res => {
                     this.isGenerating = false;
                     this.$store.dispatch('setDraft3', res);
