@@ -4,8 +4,8 @@
         <div class="w-full flex grow grid md:grid-cols-2 sm:gird-cols-1 ">
             <div class="md:flex flex-col grow w-full justify-center items-center hidden">
                 <div class="form-content form-content-md form-content-sd form-content-sm">
-                    <div class="text-main-content mb-4 w-full">The messaging has been updated for a leaner who hold a jobs
-                        and had recent travel.
+                    <div class="text-main-content mb-4 w-full">The messaging has been updated for a leaner who <b
+                            class="text-color-primary">{{ selectedQuery() }}.</b>
                     </div>
                     <div class="flex flex-col justify-center">
                         <Button class="btn-primary mb-2" :onClick="onNextPage">
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="primary-panel primary-panel-md primary-panel-sd primary-panel-sm">
-                <Paper :content="draft" draftNum="3" :mode="mode" :subject="subject" />
+                <Paper :content="draft" draftNum="3" :mode="mode" :subject="subject" :selected="selected" />
             </div>
         </div>
         <div class=" md:hidden sm:block w-full fixed bottom-0 ">
@@ -24,8 +24,8 @@
             </div>
 
             <div class="sm-tool-bar ">
-                <div class="text-main-content mb-4">he messaging has been updated for a leaner who hold a jobs and had
-                    recent travel.
+                <div class="text-main-content mb-4">he messaging has been updated for a leaner who <b
+                        class="text-color-primary">{{ selectedQuery() }}.</b>
                 </div>
                 <div class="grid w-full grid-cols-1">
                     <div class="flex flex-col justify-center">
@@ -61,11 +61,29 @@ export default {
                     question1: this.$route.query.question1,
                     question2: this.$route.query.question2,
                     question3: this.$route.query.question3,
+
                 }
             })
         },
         updateLeD() {
             this.$router.go(-1);
+        },
+        selectedQuery() {
+            let question4 = "";
+            for (let i = 0; i < this.selected.length; i++) {
+                if (this.selected.length < 2) {
+                    question4 += this.selected[i];
+                } else {
+                    if (i < this.selected.length - 2) {
+                        question4 += this.selected[i] + ", "
+                    } else if (i == this.selected.length - 2) {
+                        question4 += this.selected[i] + " and "
+                    } else {
+                        question4 += this.selected[i];
+                    }
+                }
+            }
+            return question4;
         }
     },
     computed: {
@@ -78,6 +96,9 @@ export default {
         mode() {
             return this.$route.query.question3;
         },
+        selected() {
+            return this.$route.params.selected.split(",");
+        }
     }
 }
 </script>

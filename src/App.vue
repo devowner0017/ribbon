@@ -16,7 +16,24 @@ export default {
   components: {
     Navbar
   },
-  name: 'Question 1'
+  name: 'Question 1',
+  mounted() {
+    window.addEventListener('keydown', this.handleKeyDown);
+  },
+  beforeDestroy() {
+    window.removeEventListener('keydown', this.handleKeyDown);
+  },
+  methods: {
+    handleKeyDown(event) {
+      if (event.keyCode === 116) { // 116 is the keycode for F5
+        event.preventDefault(); // prevent the default F5 behavior (refreshing the page)
+        window.location.reload(); // manually reload the page
+        window.location.href="/";
+      }
+    }
+  }
+
+
 }
 </script>
 

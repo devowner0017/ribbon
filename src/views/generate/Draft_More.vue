@@ -72,7 +72,7 @@ export default {
             isModalVisible: false,
             isGenerating: false,
             selected_draft: "",
-            selected_id: '',
+            selected_id: '4',
         }
     },
     methods: {
