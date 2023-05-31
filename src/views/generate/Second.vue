@@ -22,7 +22,7 @@
             </div>
             <LoadingPanel v-if="isGenerating" />
         </div>
-
+        <FirstDraftModal :showModal="isModalVisible" @close="closeModal"/>
     </div>
 </template>
 <script>
@@ -32,20 +32,23 @@ import generateAnswer from '../../actions/generate';
 import LoadingPanel from '../../components/utils/LoadingPanel.vue';
 import DisablePanel from '../../components/utils/DisablePanel.vue';
 import { PROMPT_ONE } from '../../prompts';
+import FirstDraftModal from '../../components/utils/FirstDraftModal.vue';
 export default {
     data() {
         return {
             question2: "",
             answer: "",
             isGenerating: false,
+            isModalVisible: false,
         }
     },
     components: {
-        MenuBar,
-        Button,
-        LoadingPanel,
-        DisablePanel
-    },
+    MenuBar,
+    Button,
+    LoadingPanel,
+    DisablePanel,
+    FirstDraftModal
+},
     name: 'tow-question',
     methods: {
         redirectToPage() {
@@ -54,9 +57,11 @@ export default {
         draftClick() {
             const question1 = this.$route.query.question1;
             this.isGenerating = true;
+            this.openModal();
             const prompt = PROMPT_ONE(question1, this.question2);
             this.answer = generateAnswer(prompt).then(res => {
                 this.isGenerating = false;
+                this.closeModal();
                 this.$store.dispatch('setDraft1', res);
                 this.$router.push({
                     path: '/questions/3',
@@ -69,7 +74,13 @@ export default {
                 this.isGenerating = false;
                 console.log(err)
             });
-        }
+        },
+        openModal() {
+            this.isModalVisible = true;
+        },
+        closeModal() {
+            this.isModalVisible = false;
+        },
     },
     computed: {
         isDisabled() {

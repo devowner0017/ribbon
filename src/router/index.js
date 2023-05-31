@@ -69,12 +69,17 @@ const router = createRouter({
         question1: route.query.question1,
         question2: route.query.question2,
         question3: route.query.question3,
+        question4: route.query.question4,
       })
     },
     {
-      path: '/done',
+      path: '/done/:selected',
       name: 'done',
-      component: Done
+      props: (route) => ({
+        question3: route.query.question3,
+        question4: route.query.question4,
+      }),
+      component: Done,
     }
   ]
 })

@@ -29,6 +29,10 @@ export default {
     showModal: {
       type: Boolean,
       default: false
+    },
+    hideClose: {
+      type: Boolean,
+      default: false,
     }
   },
   data() {
