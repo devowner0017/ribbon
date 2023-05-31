@@ -19,7 +19,7 @@
                 <DisablePanel v-if="isGenerating" />
             </div>
             <div v-if="!isGenerating" class="primary-panel primary-panel-md primary-panel-sd primary-panel-sm">
-                <Paper :content="selected_draft" :draftNum="selected_id" />
+                <Paper :content="selected_draft" :draftNum="selected_id" :selected="selected" :mode="mode" />
             </div>
             <LoadingPanel v-if="isGenerating" />
         </div>
@@ -77,7 +77,13 @@ export default {
     },
     methods: {
         onNextPage() {
-            this.$router.push('/done')
+            this.$router.push({
+                path: `/done/${this.selected_id}`, 
+                query: {
+                    question3: this.$route.query.question3,
+                    question4: this.$route.query.question4,
+                }
+            })
         },
         onClickShare() {
             this.isModalVisible = true;
@@ -85,13 +91,13 @@ export default {
         onSelectDraft(id) {
             if (id === '4') {
                 this.selected_draft = this.$store.state.draft4;
-                this.selected_id='4'
+                this.selected_id = '4'
             } else if (id === '5') {
                 this.selected_draft = this.$store.state.draft5;
-                this.selected_id='5'
+                this.selected_id = '5'
             } else if (id === '6') {
                 this.selected_draft = this.$store.state.draft6;
-                this.selected_id='6'
+                this.selected_id = '6'
             }
         }
     },
@@ -125,6 +131,14 @@ export default {
             this.isGenerating = false;
             console.log(err)
         });
+    },
+    computed: {
+        selected() {
+            return this.$route.query.question4.split(",");
+        },
+        mode() {
+            return this.$route.query.question3;
+        },
     }
 }
 </script>

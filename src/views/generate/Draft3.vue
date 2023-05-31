@@ -61,7 +61,7 @@ export default {
                     question1: this.$route.query.question1,
                     question2: this.$route.query.question2,
                     question3: this.$route.query.question3,
-
+                    question4: this.$route.params.selected,
                 }
             })
         },

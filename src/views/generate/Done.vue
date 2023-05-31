@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="primary-panel primary-panel-md primary-panel-sd primary-panel-sm">
-                <Paper :content="draft" draftNum="2" :subject="subject" :mode="mode" />
+                <Paper :content="selected_draft" draftNum="final" :subject="subject" :mode="mode" :selected="selected" />
             </div>
         </div>
         <div class=" md:hidden sm:block w-full fixed bottom-0 ">
@@ -84,11 +84,24 @@ export default {
         draft() {
             return this.$store.state.draft2;
         },
+        selected() {
+            return this.$route.query.question4.split(",");
+        },
         mode() {
-            return this.$route.params.question;
+            return this.$route.query.question3;
         },
         subject() {
             return this.$route.query.question1;
+        },
+        selected_draft() {
+            const selected_id = this.$route.params.selected;
+            if(selected_id==='4') {
+                return this.$store.state.draft4;
+            } else if(selected_id==='5') {
+                return this.$store.state.draft5;
+            } else if(selected_id==='6') {
+                return this.$store.state.draft6;
+            }
         }
     },
 }
