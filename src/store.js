@@ -8,7 +8,8 @@ const store = new Vuex.Store({
       draft3: '',
       draft4: '',
       draft5: '',
-      draft6: ''
+      draft6: '',
+      currentDraft: '',
     }
   },
   mutations: {

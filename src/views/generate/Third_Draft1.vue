@@ -22,9 +22,6 @@
             <LoadingPanel v-if="isGenerating" />
         </div>
         <div class="md:hidden sm:block w-full fixed bottom-0 ">
-            <div v-if="!isGenerating" class="flex justify-end">
-                <ShareButton class="share-btn-sm mb-6 mr-6"></ShareButton>
-            </div>
 
             <div class="sm-tool-bar ">
                 <div class="text-main-content mb-4">How is this? Would you like it more:

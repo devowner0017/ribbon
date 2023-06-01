@@ -18,9 +18,6 @@
             </div>
         </div>
         <div class=" md:hidden sm:block w-full fixed bottom-0 ">
-            <div class="flex justify-end">
-                <ShareButton class="share-btn-sm mb-6 mr-6"></ShareButton>
-            </div>
           
             <div class="sm-tool-bar ">
                 <div v-if="mode!=='looks_good'"  class="text-main-content mb-4">The draft is now more <b class="text-color-primary">{{ mode }}.</b>

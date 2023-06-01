@@ -2,7 +2,7 @@
     <nav>
         <div class="nav-bar nav-bar-sm">
             <a href="https://www.ribbonedu.com/" target="_blank"><span>
-                    <img src='@/assets/icons/logo.svg'  alt="ribbon education" />
+                    <img src='@/assets/icons/logo.svg' alt="ribbon education" />
                 </span>
             </a>
             <div class="flex">
@@ -13,45 +13,90 @@
     </nav>
     <Modal :showModal="isShareModalVisible" @close="closeShareModal" title="Share Ribbon’s AI-Powered Smart Compose Tool">
         <div>
-            We’re proud to showcase how AI can help educators communicate with their students. Share this tool with anyone you think may find it useful!
+            We’re proud to showcase how AI can help educators communicate with their students. Share this tool with anyone
+            you think may find it useful!
         </div>
-        <InputGroup placeHolder="First and last name" title="Name"/>
-        <InputGroup placeHolder="Enter your email address" title="Email"/>
-        <InputGroup placeHolder="Enter your email address" title="Emails to share with(comma separeted)"/>
+        <InputGroup placeHolder="First and last name" title="Name" :value="name" type="text" :error="errors.name"
+            v-on:update:value="name = $event" />
+        <InputGroup placeHolder="Enter your email address" title="Email" :value="email" type="email" :error="errors.email"
+            v-on:update:value="email = $event" />
+        <InputGroup placeHolder="Enter your email address" title="Emails to share with(comma separeted)" :value="emails" :error="errors.emails"
+            v-on:update:value="emails = $event"/>
         <div class="d-flex mt-5">
-            <button type="button" class="btn btn-primary btn-sm w-full" disabled>share</button>
+            <SendButton title="share" :isSending="isSending" @click="sendData" :disabled="isDisabled"/>
         </div>
     </Modal>
     <AboutModal :showModal="isAboutModalVisible" @close="closeAboutModal"></AboutModal>
+    <v-snackbar v-model="snackbar" :timeout="3000">
+        <div class="flex items-center"><img src="/images/check.svg" class="mr-2" alt="check" /> <span>Successfully shared with 3 others!</span></div>
+    </v-snackbar>
 </template>
 <script>
 import Button from './Button.vue';
 import AboutModal from './utils/AboutModal.vue';
 import Modal from './utils/Modal.vue';
 import InputGroup from './InputGroup.vue';
+import SendButton from './SendButton.vue';
+import { EMAIL_ERRORS } from '../errors';
+import { sendDataToHubspot } from '../actions/hubspot';
 export default {
     name: 'Navbar',
-    components: { Button, AboutModal, Modal, InputGroup },
+    components: { Button, AboutModal, Modal, InputGroup, SendButton },
     data() {
         return {
             isAboutModalVisible: false,
             isShareModalVisible: false,
+            name: "",
+            email: "",
+            emails: "",
+            isSending: false,
+            snackbar: false,
+            errors: {}
         }
     },
     methods: {
         closeAboutModal() {
-          this.isAboutModalVisible = false;
+            this.isAboutModalVisible = false;
         },
         showAboutModal() {
-          this.isAboutModalVisible = true;
+            this.isAboutModalVisible = true;
         },
         showShareModal() {
             this.isShareModalVisible = true;
         },
         closeShareModal() {
             this.isShareModalVisible = false;
+        },
+        sendData() {
+            if (EMAIL_ERRORS(this.email)) {
+                this.errors.email = EMAIL_ERRORS(this.email);
+            } else {
+                this.errors = {};
+                const data = {
+                    email: this.email,
+                    name: this.name,
+                    emails: this.emails,
+                }
+                this.isSending = true;
+                sendDataToHubspot(data).then(res => {
+                    this.closeShareModal();
+                    this.email = '';
+                    this.name = '';
+                    this.emails = '';
+                    this.snackbar = true;
+                    this.isSending = false;
+                }).catch((err) => {
+                    this.isSending = false;
+                    console.log(err)
+                });
+            }
         }
     },
+    computed: {
+        isDisabled() {
+            return this.email === '' || this.name === '' || this.emails === '';
+        }
+    }
 
 }
 

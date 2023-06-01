@@ -1,6 +1,6 @@
 <template>
     <div class="w-full h-full relative">
-        <ShareButton class="absolute md:block bottom-6 right-6 share-btn-sm sm:hidden hidden">
+        <ShareButton :currentDraft="content" class="absolute md:block bottom-6 right-6 share-btn-sm ">
             <div class="flex">
                 <img src="/images/messageBox.svg" class="mr-2" alt="share" /> SHARE
             </div>

@@ -1,27 +1,51 @@
 <template>
     <div class="w-full my-3">
         <span class="label-text">{{ title }}</span>
-        <input type="text" :placeholder="placeHolder" class="w-full input-text mt-2" />
+        <input :type="type" :value="value" :placeholder="placeHolder" class="w-full input-text mt-2"  v-model="model" @input="updateValue" />
+        <span v-if="isError" class="label-text error-text mt-2">{{ error }}</span>
     </div>
 </template>
 <script>
-    export default{
-        props: {
-            title: {
-                type: String,
-                default: ""
-            },
-            placeHolder: {
-                type: String, 
-                default: ""
-            }
+export default {
+    props: {
+        title: {
+            type: String,
+            default: ""
         },
-        data() {
-            return {
-
-            }
+        placeHolder: {
+            type: String,
+            default: ""
+        },
+        type: {
+            type: String,
+            default: 'text'
+        },
+        error: {
+            type: String,
+            default: null
+        },
+        value: {
+            type: String,
+            default: ''
+        }
+    },
+    data() {
+        return {
+            model: ""
+        }
+    },
+    methods: {
+        updateValue() {
+            this.$emit('update:value', this.model);
+        }
+    },
+    computed: {
+        isError() {
+            return this.error
         }
     }
+   
+}
 </script>
 <style scoped lang="scss">
 .label-text {
@@ -30,5 +54,9 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
+}
+
+.error-text {
+    color: red;
 }
 </style>
