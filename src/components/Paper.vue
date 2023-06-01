@@ -6,8 +6,8 @@
             </div>
         </ShareButton>
         <div class="paper" ref="container">
-            <div class="absolute paper-text paper-text-sd paper-text-sm">
-                <div class="mb-3">
+            <div class="absolute paper-text paper-text-sd paper-text-sm" ref="textContainer">
+                <div>
                     <b>
                         {{ draftName }}
                     </b><br />
@@ -20,15 +20,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="md:pb-0 sm:pb-52 pb-60">
                 {{
                     this.content
-                }}
+                }}</div>
             </div>
             <div class="w-full h-full">
                 <div class="paper-piece-1"></div>
                 <div class="paper-piece-2"></div>
-                <div class="paper-piece-3"></div>
-                <div class="hidden paper-piece-3" ref="piece"></div>
+                <div class="paper-piece-3" ref="piece"></div>
+                <div v-for="i in piece_count" class="paper-piece-3"> </div>
             </div>
         </div>
     </div>
@@ -58,6 +59,12 @@ export default {
             default: []
         }
     },
+    data() {
+        return {
+            piece_count: 0,
+            containerHeight: 0,
+        }
+    },
     components: {
         ShareButton,
     },
@@ -72,22 +79,23 @@ export default {
         }
     },
     mounted() {
+        window.addEventListener('resize', this.handleScroll);
         this.$refs.container.addEventListener('scroll', this.handleScroll);
     },
+
     methods: {
         handleScroll() {
-            const container = this.$refs.container;
+            const textContainer = this.$refs.textContainer;
             const piece = this.$refs.piece;
-            console.log(piece.clientHeight)
-            console.log(container.clientHeight);
-            console.log(container.scrollTop)
-            if (container.scrollTop >= piece.clientHeight) {
-                piece.style.display = 'block';
-            } else {
-                piece.style.display = 'none';
+            if (piece) {
+                const piece_height = piece.clientHeight;
+                if (piece_height)
+                    this.piece_count = Math.ceil((textContainer.scrollHeight - textContainer.offsetHeight) / piece_height);
             }
         }
-    }
-
+    },
+    beforeDestroy() {
+        window.removeEventListener('resize', this.handleResize);
+    },
 }
 </script>

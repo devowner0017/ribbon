@@ -22,7 +22,6 @@
             <div class="flex justify-end">
                 <ShareButton class="share-btn-sm mb-6 mr-6"></ShareButton>
             </div>
-
             <div class="sm-tool-bar ">
                 <div class="text-main-content mb-4">he messaging has been updated for a leaner who <b
                         class="text-color-primary">{{ selectedQuery() }}.</b>

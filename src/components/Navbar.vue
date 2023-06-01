@@ -2,12 +2,12 @@
     <nav>
         <div class="nav-bar nav-bar-sm">
             <a href="https://www.ribbonedu.com/" target="_blank"><span>
-                    <img src='@/assets/icons/logo.svg' alt="ribbon education" />
+                    <img src='@/assets/icons/logo.svg'  alt="ribbon education" />
                 </span>
             </a>
-            <div class="">
-                <Button class="btn-ghost" v-on:click="showAboutModal">about</Button>
-                <Button class="btn-primary" v-on:click="showShareModal">share</Button>
+            <div class="flex">
+                <Button class="btn-ghost btn-sm" v-on:click="showAboutModal">about</Button>
+                <Button class="btn-primary btn-sm" v-on:click="showShareModal">share</Button>
             </div>
         </div>
     </nav>

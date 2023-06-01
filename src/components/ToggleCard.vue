@@ -1,7 +1,7 @@
 <template>
     <div class="toggle-card flex">
         <button class="card card-sm"  :onClick="this.onClick" :onFocus="onFocus" :onFocusout="onFocusOut" >
-            <span :hidden="!icon" class="md:mr-4 sm:mr-2 mr-1">
+            <span :hidden="!icon">
                 <object :data="icon" class="imgColor md:inline hidden" type="image/svg+xml" width="45" ref="icon" height="45" ></object>
                 <object :data="icon" class="imgColor md:hidden inline" type="image/svg+xml" width="24" ref="icon_s" height="24" ></object>
             </span>
