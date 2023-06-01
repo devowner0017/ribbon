@@ -513,6 +513,7 @@
   border-radius: 72px;
   color: $whiteColor;
   display: flex;
+  z-index: 100;
   justify-content: center;
   align-items: center;
 }
@@ -602,6 +603,14 @@
   .paper-text-sd {
     padding: 64px 24px;
   }
+
+  .share-btn-sm {
+    width: 56px;
+    height: 56px;
+    padding: 12px;
+    bottom: 160px;
+    right: 17px;
+  }
 }
 
 @media screen and (max-width: 640px) {
@@ -651,11 +660,6 @@
     padding: 64px 24px 210px 24px;
   }
 
-  .share-btn-sm {
-    width: 56px;
-    height: 56px;
-    padding: 12px;
-  }
 }
 
 .loading-panel {

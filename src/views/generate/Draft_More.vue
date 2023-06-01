@@ -24,10 +24,6 @@
             <LoadingPanel v-if="isGenerating" />
         </div>
         <div class=" md:hidden sm:block w-full fixed bottom-0 ">
-            <div v-if="!isGenerating" class="flex justify-end">
-                <ShareButton class="share-btn-sm mb-6 mr-6" :onCick="onClickShare"></ShareButton>
-            </div>
-
             <div class="sm-tool-bar ">
                 <div class="text-main-content mb-4 px-2">Here are <span class="text-primary-content">3 additional
                         drafts.</span>
