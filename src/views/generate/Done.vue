@@ -12,11 +12,11 @@
                             Provide your email so we can send you your final version and get access to our top performing
                             email templates used by institutions like yours.
                         </p>
-                        <InputGroup title="Name" placeHolder="First and last name" />
-                        <InputGroup title="Email" placeHolder="Enter your email address" />
-                        <Button class="btn-primary mb-2" :onClick="onNextPage">
-                            SEND ME FINAL VERSION
-                        </Button>
+                        <InputGroup title="Name" placeHolder="First and last name" :value="name"
+                            :error="errors.name" v-on:update:value="name = $event" />
+                        <InputGroup title="Email" placeHolder="Enter your email address"  :value="email" type="email"
+                            :error="errors.email" v-on:update:value="email = $event"/>
+                        <div class="flex mt-3"><SendButton title="SEND ME FINAL VERSION" :isSending="isSending" @click="sendData" :disabled="isDisabled" /></div>
                         <div class="line my-8"></div>
                         <p class="bottom-text-title">
                             About Ribbon Education
@@ -47,7 +47,10 @@
                 </div>
             </div>
         </div>
-
+        <v-snackbar v-model="snackbar" :timeout="3000">
+            <div class="flex items-center"><img src="/images/check.svg" class="mr-2" alt="check" /> <span>Sent
+                    your email!</span></div>
+        </v-snackbar>
     </div>
 </template>
 <script>
@@ -56,39 +59,71 @@ import Button from '../../components/Button.vue';
 import Paper from '../../components/Paper.vue';
 import ShareButton from '../../components/ShareButton.vue';
 import InputGroup from '../../components/InputGroup.vue';
+import SendButton from '../../components/SendButton.vue';
+import { sendDataToHubspot } from '../../actions/hubspot';
+import { EMAIL_ERRORS } from '../../errors';
+import { EMPTY_ERRORS } from '../../errors';
 export default {
     components: {
-        MenuBar,
-        Button,
-        Paper,
-        ShareButton,
-        InputGroup
-    },
+    MenuBar,
+    Button,
+    Paper,
+    ShareButton,
+    InputGroup,
+    SendButton
+},
     name: 'Second Question',
     methods: {
-        onNextPage() {
-            this.$router.push({
-                path: '/questions/4',
-                query: {
-                    question1: this.$route.query.question1,
-                    question2: this.$route.query.question2,
-                    question3: this.$route.params.question
+        sendData() {
+            if (EMAIL_ERRORS(this.email) || EMPTY_ERRORS(this.name) || EMPTY_ERRORS(this.email)) {
+                this.errors.email = EMAIL_ERRORS(this.email);
+                this.errors.name = EMPTY_ERRORS(this.name);
+            } else {
+                this.errors = {};
+                const data = {
+                    email: this.email,
+                    name: this.name,
+                    draft: this.selected_draft
                 }
-            });
-        },
+                this.isSending = true;
+                sendDataToHubspot(data).then(res => {
+                    this.closeDialog();
+                    this.email = '';
+                    this.name = "";
+                    this.snackbar = true;
+                    this.isSending = false;
+                }).catch((err) => {
+                    this.isSending = false;
+                    console.log(err)
+                });
+            }
+        }
+    },
+    data() {
+        return {
+            email: "",
+            isSending: false,
+            snackbar: false,
+            errors: {},
+            name: ""
+        }
     },
     computed: {
         draft() {
             return this.$store.state.draft2;
         },
         selected() {
-            return this.$route.query.question4.split(",");
+            if(this.$route.query.question4)
+                return this.$route.query.question4.split(",");
         },
         mode() {
             return this.$route.query.question3;
         },
         subject() {
             return this.$route.query.question1;
+        },
+        isDisabled() {
+            return this.email === '';
         },
         selected_draft() {
             const selected_id = this.$route.params.selected;

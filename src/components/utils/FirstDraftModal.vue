@@ -16,29 +16,36 @@
                             In the meantime, get inspired by top performing email templates made using this tool by
                             institutions like Flatiron School, Reach University, and Stanford University.
                         </div>
-                        <InputGroup placeHolder="Enter your email address" title="Your Email" />
+                        <InputGroup placeHolder="Enter your email address" title="Your Email" :value="email" type="email"
+                            :error="errors.email" v-on:update:value="email = $event" />
                         <div class="d-flex mt-">
-                            <button type="button" class="btn btn-primary btn-sm w-full" @click="shareDraft"
-                                disabled>SEND</button>
+                            <SendButton :isSending="isSending" @click="sendData" :disabled="isDisabled" />
                         </div>
                         <div class="d-flex mt-3">
-                            <button type="button" class="btn btn-secondary btn-sm w-full" @click="shareDraft">Maybe
+                            <button type="button" class="btn btn-secondary btn-sm w-full" @click="closeDialog">Maybe
                                 later</button>
                         </div>
                         <div class="mt-3 text-color-gray sm-text">
                             By entering your email, you agree to Ribbon Education’s terms and conditions and privacy
-                                policy.
+                            policy.
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <v-snackbar v-model="snackbar" :timeout="3000">
+            <div class="flex items-center"><img src="/images/check.svg" class="mr-2" alt="check" /> <span>Sent
+                    your email!</span></div>
+        </v-snackbar>
     </div>
 </template>
   
 <script>
 import SuccessModal from './SuccessModal.vue';
 import InputGroup from '../InputGroup.vue';
+import { EMAIL_ERRORS } from '../../errors';
+import { sendDataToHubspot } from '../../actions/hubspot';
+import SendButton from '../SendButton.vue';
 export default {
     props: {
         title: String,
@@ -55,12 +62,37 @@ export default {
         return {
             dialogVisible: this.showModal,
             isModalVisible: false,
+            email: '',
+            errors: {},
+            isSending: false,
+            snackbar: false,
+
         }
     },
     methods: {
         closeDialog() {
             this.dialogVisible = false;
             this.$emit('close');
+        },
+        sendData() {
+            if (EMAIL_ERRORS(this.email)) {
+                this.errors.email = EMAIL_ERRORS(this.email);
+            } else {
+                this.errors = {};
+                const data = {
+                    email: this.email,
+                }
+                this.isSending = true;
+                sendDataToHubspot(data).then(res => {
+                    this.closeDialog();
+                    this.email = '';
+                    this.snackbar = true;
+                    this.isSending = false;
+                }).catch((err) => {
+                    this.isSending = false;
+                    console.log(err)
+                });
+            }
         }
     },
     watch: {
@@ -68,9 +100,15 @@ export default {
             this.dialogVisible = newValue;
         }
     },
+    computed: {
+        isDisabled() {
+            return this.email === '';
+        }
+    },
     components: {
         SuccessModal,
         InputGroup,
+        SendButton,
     }
 }
 </script>

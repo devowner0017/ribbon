@@ -130,7 +130,8 @@ export default {
     },
     computed: {
         selected() {
-            return this.$route.query.question4.split(",");
+            if(this.$route.query.question4)
+                return this.$route.query.question4.split(",");
         },
         mode() {
             return this.$route.query.question3;
