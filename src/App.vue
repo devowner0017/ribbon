@@ -18,22 +18,19 @@ export default {
   },
   name: 'Question 1',
   mounted() {
-    window.addEventListener('keydown', this.handleKeyDown);
+    window.addEventListener('load', this.handleload);
   },
   beforeDestroy() {
-    window.removeEventListener('keydown', this.handleKeyDown);
+    window.removeEventListener('load', this.handleload);
   },
   methods: {
-    handleKeyDown(event) {
-      if (event.keyCode === 116) { // 116 is the keycode for F5
-        event.preventDefault(); // prevent the default F5 behavior (refreshing the page)
-        window.location.reload(); // manually reload the page
-        window.location.href="/";
-      }
+    handleload(event) {  
+      event.preventDefault();
+      this.$router.push('/');
+      window.removeEventListener('unload', this.handleload);
+      
     }
-  }
-
-
+  },
 }
 </script>
 
