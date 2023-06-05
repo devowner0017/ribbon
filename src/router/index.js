@@ -2,9 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { First_Question, Second_Question, Third_Question_Draft1, Fourth_Question, Draft2, Draft3, Draft_More, Done } from '../views/generate';
 import Home from '../views/Home.vue';
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  mode: 'history',
-  base: '/questions/1',
+ 
   routes: [
     {
       paht: '/',
