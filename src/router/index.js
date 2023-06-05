@@ -4,7 +4,6 @@ import Home from '../views/Home.vue';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   mode: 'history',
-  base: '/questions/1',
   routes: [
     {
       path: '/',
