@@ -17,8 +17,7 @@
                 <Paper :content="draft" draftNum="2" :subject="subject" :mode="mode"/>
             </div>
         </div>
-        <div class=" md:hidden sm:block w-full fixed bottom-0 ">
-          
+        <div class=" md:hidden sm:block w-full absolue bottom-0 z-50">
             <div class="sm-tool-bar ">
                 <div v-if="mode!=='looks_good'"  class="text-main-content mb-4">The draft is now more <b class="text-color-primary">{{ mode }}.</b>
                 </div>

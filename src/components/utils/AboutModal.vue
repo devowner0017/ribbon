@@ -44,18 +44,20 @@ export default {
                     </div>
                     <div class="modal-content content-text">
                         <div class="grid grid-cols-1 w-full">
-                            <div class="text-main-content mb-2 title-text title-text-sm"><b>Meet Ribbon’s AI-Powered Smart
-                                    Compose Tool</b></div>
+                            <div class="text-main-content mb-2 title-text title-text-sm"><b>The Ultimate AI-Powered Message
+                                    Builder
+                                    for Online Institutions</b></div>
                             <div class="text-middle-content mb-6">
-                                <div>We’re proud to showcase how AI can inspire new communicate
-                                    with their students. Share this tool with anyone you think may find it useful!</div>
-
+                                <div>Ribbon’s free, message builder harnesses AI and incorporates the best examples from top
+                                    online programs to generate personalized email templates.</div>
                                 <div class="mt-5"><b>About Ribbon Education</b></div>
-                                fdslkjfdskafjskdalfjsa fsaf
+                                We build tools to help save you time, so you can focus on what truly matters – fostering
+                                meaningful connections with your students.
                             </div>
                             <div>
                                 <a class="w-full" href="https://www.ribbonedu.com/" target="_blank">
-                                     <div class="flex"><button type="button" class="btn btn-primary  font-small-caps w-full" v-on:click="closeDialog">LEARN MORE</button></div>
+                                    <div class="flex"><button type="button" class="btn btn-primary  font-small-caps w-full"
+                                            v-on:click="closeDialog">LEARN MORE</button></div>
                                 </a>
                             </div>
                         </div>

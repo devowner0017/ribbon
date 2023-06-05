@@ -5,7 +5,7 @@
             <div class="relative md:flex flex-col grow w-full justify-center items-center hidden">
                 <div class="form-content form-content-md form-content-sd form-content-sm">
                     <div class="text-main-content mb-4 px-2">Here are <span class="text-primary-content">3 additional
-                            drafts.</span>
+                            options.</span>
                     </div>
                     <div class=" grid grid-cols-3">
                         <ToggleCard text="OPTION A" @click="onSelectDraft('4')" />
@@ -23,10 +23,10 @@
             </div>
             <LoadingPanel v-if="isGenerating" />
         </div>
-        <div class=" md:hidden sm:block w-full fixed bottom-0 ">
+        <div class=" md:hidden sm:block w-full absolue bottom-0 z-50">
             <div class="sm-tool-bar ">
                 <div class="text-main-content mb-4 px-2">Here are <span class="text-primary-content">3 additional
-                        drafts.</span>
+                        options.</span>
                 </div>
                 <div class="grid w-full grid-cols-3">
                     <ToggleCard text="OPTION A" @click="onSelectDraft('4')" />

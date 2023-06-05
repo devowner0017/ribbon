@@ -8,9 +8,9 @@
                     </div>
                     <div class="flex flex-col justify-center">
                         <ToggleCard text="professional" icon="/images/professional.svg"
-                            @click="makeDraft2('professional')" />
-                        <ToggleCard text="supportive" icon="/images/supportive.svg" @click="makeDraft2('supportive')" />
-                        <ToggleCard text="upbeat" icon="/images/upbeat.svg" @click="makeDraft2('upbeat')" />
+                            @click="makeDraft2('Professional')" />
+                        <ToggleCard text="supportive" icon="/images/supportive.svg" @click="makeDraft2('Supportive')" />
+                        <ToggleCard text="upbeat" icon="/images/upbeat.svg" @click="makeDraft2('Upbeat')" />
                         <ToggleCard text="looks good" icon="/images/looksgood.svg" @click="makeDraft2('looks_good')" />
                     </div>
                 </div>
@@ -21,20 +21,19 @@
             </div>
             <LoadingPanel v-if="isGenerating" />
         </div>
-        <div class="md:hidden sm:block w-full fixed bottom-0 ">
-
+        <div class="md:hidden sm:block w-full absolue bottom-0 z-50">
             <div class="sm-tool-bar ">
                 <div class="text-main-content mb-4">How is this? Would you like it more:
                 </div>
                 <div class="grid w-full grid-cols-2">
                     <div class="m-1">
-                        <ToggleCard text="professional" icon="/images/professional.svg" @click="makeDraft2(professional)" />
+                        <ToggleCard text="professional" icon="/images/professional.svg" @click="makeDraft2('Professional')" />
                     </div>
                     <div class="m-1">
-                        <ToggleCard text="supportive" icon="/images/supportive.svg" @click="makeDraft2(supportive)" />
+                        <ToggleCard text="supportive" icon="/images/supportive.svg" @click="makeDraft2('Supportive')" />
                     </div>
                     <div class="m-1">
-                        <ToggleCard text="upbeat" icon="/images/upbeat.svg" @click="makeDraft2(upbeat)" />
+                        <ToggleCard text="upbeat" icon="/images/upbeat.svg" @click="makeDraft2('Upbeat')" />
                     </div>
                     <div class="m-1">
                         <ToggleCard text="looks good" icon="/images/looksgood.svg" @click="makeDraft2('looks_good')" />
@@ -57,7 +56,6 @@ import DisablePanel from '../../components/utils/DisablePanel.vue';
 import LoadingPanel from '../../components/utils/LoadingPanel.vue';
 import { PROFESSIONAL, SUPPORTIVE, UPBEAT } from '../../prompts';
 import { PROMPT_TWO } from '../../prompts';
-import { propsToAttrMap } from '@vue/shared';
 export default {
     components: {
         ToggleCard,
