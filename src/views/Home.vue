@@ -6,7 +6,7 @@
 <script>
     export default {
         created() {
-            // this.$router.push('/questions/1');
+            this.$router.push('/questions/1');
         }
     }
 </script>
