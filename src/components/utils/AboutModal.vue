@@ -53,9 +53,9 @@ export default {
                                 <div class="mt-5"><b>About Ribbon Education</b></div>
                                 fdslkjfdskafjskdalfjsa fsaf
                             </div>
-                            <div class="grid grid-cols-1 w-full">
-                                <a href="https://www.ribbonedu.com/" target="_blank">
-                                     <button type="button" class="btn btn-primary  font-small-caps" v-on:click="closeDialog">LEARN MORE</button>
+                            <div>
+                                <a class="w-full" href="https://www.ribbonedu.com/" target="_blank">
+                                     <div class="flex"><button type="button" class="btn btn-primary  font-small-caps w-full" v-on:click="closeDialog">LEARN MORE</button></div>
                                 </a>
                             </div>
                         </div>
