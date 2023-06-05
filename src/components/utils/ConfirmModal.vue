@@ -50,7 +50,7 @@ export default {
                                 want, you can <b>share</b> your current drafts using the button on the bottom right before
                                 continuing on with a clean slate.</div>
                             <div class="grid grid-cols-2 w-full">
-                                <button type="button" class=" btn btn-secondary  font-small-caps ">Nevermind!</button>
+                                <button type="button" class=" btn btn-secondary  font-small-caps" :onClick="closeDialog">Nevermind!</button>
                                 <button type="button" class="  btn btn-primary  font-small-caps" :onClick="redierctToStartPage">Start over</button>
                             </div>
                         </div>
