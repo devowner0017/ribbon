@@ -382,7 +382,7 @@
     cursor: pointer;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     background-color: $whiteColor;
     padding: 16px 24px;
@@ -395,6 +395,7 @@
     font-size: 16px;
     line-height: 24px;
     letter-spacing: 0.1em;
+    text-align: center;
     text-transform: uppercase;
     color: $primaryColor;
     box-sizing: border-box;
@@ -508,6 +509,8 @@
   padding: 24px;
   width: 80px;
   height: 80px;
+  right: 20px;
+  bottom: 20px;
   background: $primaryColor;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
   border-radius: 72px;
@@ -597,7 +600,8 @@
   }
 
   .primary-panel-sd {
-    padding: 20px 8px;
+    padding: 20px 8px 0px 8px;
+    margin-bottom: -4px;
   }
 
   .paper-text-sd {
@@ -608,8 +612,6 @@
     width: 56px;
     height: 56px;
     padding: 12px;
-    bottom: 160px;
-    right: 17px;
   }
 }
 
@@ -653,7 +655,8 @@
   }
 
   .primary-panel-sm {
-    padding: 20px 8px;
+    padding: 20px 8px 0px 8px;
+    margin-bottom: -4px;
   }
 
   .paper-text-sm {

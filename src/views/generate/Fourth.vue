@@ -8,14 +8,14 @@
                         this Learner:
                     </div>
                     <div class=" grid grid-cols-2">
-                        <CheckCard text="holds a job" :isSelected="selected.includes('holds a job')"
-                            :disabled="otherCardDisabled" @click="select('holds a job')" />
-                        <CheckCard text="caretaker" :isSelected="selected.includes('caretaker')"
-                            :disabled="otherCardDisabled" @click="select('caretaker')" />
-                        <CheckCard text="recent illness" :isSelected="selected.includes('recent illness')"
-                            :disabled="otherCardDisabled" @click="select('recent illness')" />
-                        <CheckCard text="recent travel" :isSelected="selected.includes('recent travel')"
-                            :disabled="otherCardDisabled" @click="select('recent travel')" />
+                        <CheckCard text="holds a job" :isSelected="selected.includes('Holds a job')"
+                            :disabled="otherCardDisabled" @click="select('Holds a job')" />
+                        <CheckCard text="caretaker" :isSelected="selected.includes('Caretaker')"
+                            :disabled="otherCardDisabled" @click="select('Caretaker')" />
+                        <CheckCard text="recent illness" :isSelected="selected.includes('Recent illness')"
+                            :disabled="otherCardDisabled" @click="select('Recent illness')" />
+                        <CheckCard text="recent travel" :isSelected="selected.includes('Recent travel')"
+                            :disabled="otherCardDisabled" @click="select('Recent travel')" />
                         <CheckCard text="Took time off" :isSelected="selected.includes('Took time off')"
                             :disabled="otherCardDisabled" @click="select('Took time off')" />
                         <CheckCard text="none apply" :isSelected="selected.includes('none apply')"
@@ -33,24 +33,24 @@
             </div>
             <LoadingPanel v-if="isGenerating" />
         </div>
-        <div class=" md:hidden sm:block w-full fixed bottom-0 ">
+        <div class=" md:hidden sm:block w-full absolue bottom-0 z-50">
             <div class="sm-tool-bar ">
                 <div class="text-main-content mb-4">Want to personalize this further? Select any that apply to this Learner:
                 </div>
                 <div class="grid w-full grid-cols-1">
                     <div class="grid w-fill grid-cols-3">
-                        <CheckCard text="holds a job" :isSelected="selected.includes(hold_a_job)"
-                            :disabled="otherCardDisabled" @click="select(hold_a_job)" />
-                        <CheckCard text="caretaker" :isSelected="selected.includes(caretaker)" :disabled="otherCardDisabled"
-                            @click="select(caretaker)" />
-                        <CheckCard text="recent illness" :isSelected="selected.includes(recent_illness)"
-                            :disabled="otherCardDisabled" @click="select(recent_illness)" />
+                        <CheckCard text="holds a job" :isSelected="selected.includes('Hold a job')"
+                            :disabled="otherCardDisabled" @click="select('Hold a job')" />
+                        <CheckCard text="caretaker" :isSelected="selected.includes('Caretaker')" :disabled="otherCardDisabled"
+                            @click="select('Caretaker')" />
+                        <CheckCard text="recent illness" :isSelected="selected.includes('Recent illness')"
+                            :disabled="otherCardDisabled" @click="select('Recent illness')" />
                     </div>
                     <div class="grid w-full grid-cols-3">
-                        <CheckCard text="recent travel" :isSelected="selected.includes(recent_travel)"
-                            :disabled="otherCardDisabled" @click="select(recent_travel)" />
-                        <CheckCard text="Took time off" :isSelected="selected.includes(took_time_off)"
-                            :disabled="otherCardDisabled" @click="select(took_time_off)" />
+                        <CheckCard text="recent travel" :isSelected="selected.includes('Recent travel')"
+                            :disabled="otherCardDisabled" @click="select('Recent travel')" />
+                        <CheckCard text="Took time off" :isSelected="selected.includes('Took time off')"
+                            :disabled="otherCardDisabled" @click="select('Took time off')" />
                         <CheckCard text="none apply" :isSelected="selected.includes('none apply')"
                             :disabled="noApplyDisabled" @click="select('none apply')" />
                     </div>

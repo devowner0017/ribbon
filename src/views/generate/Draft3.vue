@@ -18,7 +18,7 @@
                 <Paper :content="draft" draftNum="3" :mode="mode" :subject="subject" :selected="selected" />
             </div>
         </div>
-        <div class=" md:hidden sm:block w-full fixed bottom-0 ">
+        <div class=" md:hidden sm:block w-full absolue bottom-0 z-50">
             <div class="sm-tool-bar ">
                 <div class="text-main-content mb-4">he messaging has been updated for a leaner who <b
                         class="text-color-primary">{{ selectedQuery() }}.</b>

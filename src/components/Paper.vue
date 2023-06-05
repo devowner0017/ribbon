@@ -1,6 +1,6 @@
 <template>
     <div class="w-full h-full relative">
-        <ShareButton :currentDraft="content" class="absolute md:block bottom-6 right-6 share-btn-sm ">
+        <ShareButton :currentDraft="content" class="absolute md:block share-btn-sm ">
             <div class="flex">
                 <img src="/images/messageBox.svg" class="mr-2" alt="share" /> SHARE
             </div>
@@ -11,16 +11,16 @@
                     <b>
                         {{ draftName }}
                     </b><br />
-                    <div v-if="(mode.length > 0 && mode !== 'looks_good') || selected.length > 0" class="border-b">
-                        <div class="more-item mr-2 inline-block mb-2">
-                            more {{ mode }}
+                    <div v-if="(mode.length > 0 && mode !=='looks_good') || selected.length > 0" class="border-b">
+                        <div v-if="(mode.length > 0 && mode !=='looks_good')" class="more-item mr-2 inline-block mb-2">
+                            More {{ mode }}
                         </div>
-                        <div v-for="(item, index) in selected" class="more-item mr-2 inline-block mb-2">
+                        <div v-if="selected.length > 0" v-for="(item, index) in selected" class="more-item mr-2 inline-block mb-2">
                             {{ item }}
                         </div>
                     </div>
                 </div>
-                <div class="md:pb-0 sm:pb-52 pb-60">
+                <div class="md:pb-0">
                 {{
                     this.content
                 }}</div>
