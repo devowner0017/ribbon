@@ -8,9 +8,9 @@
                             options.</span>
                     </div>
                     <div class=" grid grid-cols-3">
-                        <ToggleCard text="OPTION A" @click="onSelectDraft('4')" />
-                        <ToggleCard text="OPTION B" @click="onSelectDraft('5')" />
-                        <ToggleCard text="OPTION C" @click="onSelectDraft('6')" />
+                        <ToggleCard text="OPTION A" option @click="onSelectDraft('4')" />
+                        <ToggleCard text="OPTION B" option @click="onSelectDraft('5')" />
+                        <ToggleCard text="OPTION C" option @click="onSelectDraft('6')" />
                     </div>
                     <div class="flex flex-row w-full px-1">
                         <Button class="btn-primary  mt-1 w-full" :onClick="onNextPage">select</Button>
@@ -29,9 +29,9 @@
                         options.</span>
                 </div>
                 <div class="grid w-full grid-cols-3">
-                    <ToggleCard text="OPTION A" @click="onSelectDraft('4')" />
-                    <ToggleCard text="OPTION B" @click="onSelectDraft('5')" />
-                    <ToggleCard text="OPTION C" @click="onSelectDraft('6')" />
+                    <ToggleCard text="OPTION A" option @click="onSelectDraft('4')" />
+                    <ToggleCard text="OPTION B" option @click="onSelectDraft('5')" />
+                    <ToggleCard text="OPTION C" option @click="onSelectDraft('6')" />
                 </div>
                 <div class="flex flex-row w-full px-1">
                     <Button class="btn-primary  mt-1 w-full" :onClick="onNextPage">select</Button>

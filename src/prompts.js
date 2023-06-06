@@ -53,5 +53,5 @@ export const PROMPT_THREE = (draft, selection) => {
 }
 //--------------------------------------------------------------------------------
 export const PROMPT_FOUR = (draft) => {
-    return `Now give me 3 of "${draft}" varying by tone, length and level of detail: Separate each email by inserting a "$" at the end of the email and do not include "Version" and email number at the top of each email. And Don't remove the subject.`;
+    return `Now give me 3 of "${draft}" varying by tone, length and level of detail: Separate each email by inserting a "$" at the end of the email and only write email content and subject that have not any number('1)', '2)', '3)').`;
 }

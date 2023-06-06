@@ -1,6 +1,6 @@
 <template>
     <div class="toggle-card flex">
-        <button class="card card-sm"  :onClick="this.onClick" :onFocus="onFocus" :onFocusout="onFocusOut" >
+        <button :class="['card card-sm', {'justify-center items-center text-center': option}]"  :onClick="this.onClick" :onFocus="onFocus" :onFocusout="onFocusOut" >
             <span :hidden="!icon">
                 <object :data="icon" class="imgColor md:inline hidden" type="image/svg+xml" width="45" ref="icon" height="45" ></object>
                 <object :data="icon" class="imgColor md:hidden inline" type="image/svg+xml" width="24" ref="icon_s" height="24" ></object>
@@ -24,6 +24,10 @@ export default {
         onClick: {
             type: Function,
             default: null
+        },
+        option: {
+            type: Boolean,
+            default: false,
         }
     },
     data() {
