@@ -17,20 +17,20 @@ export default {
     Navbar
   },
   name: 'Question 1',
-  // mounted() {
-  //   window.addEventListener('load', this.handleload);
-  // },
-  // beforeDestroy() {
-  //   window.removeEventListener('load', this.handleload);
-  // },
-  // methods: {
-  //   handleload(event) {  
-  //     event.preventDefault();
-  //     this.$router.push('/');
-  //     window.removeEventListener('unload', this.handleload);
+  mounted() {
+    window.addEventListener('load', this.handleload);
+  },
+  beforeDestroy() {
+    window.removeEventListener('load', this.handleload);
+  },
+  methods: {
+    handleload(event) {  
+      event.preventDefault();
+      this.$router.push('/');
+      window.removeEventListener('unload', this.handleload);
       
-  //   }
-  // },
+    }
+  },
 }
 </script>
 
