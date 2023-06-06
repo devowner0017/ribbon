@@ -28,7 +28,7 @@
     </Modal>
     <AboutModal :showModal="isAboutModalVisible" @close="closeAboutModal"></AboutModal>
     <v-snackbar v-model="snackbar" :timeout="3000">
-        <div class="flex items-center"><img src="/images/check.svg" class="mr-2" alt="check" /> <span>Successfully shared with 3 others!</span></div>
+        <div class="flex items-center"><img src="/images/check.svg" class="mr-2" alt="check" /> <span>Thanks, sent!</span></div>
     </v-snackbar>
 </template>
 <script>
