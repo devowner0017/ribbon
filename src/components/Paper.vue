@@ -1,6 +1,6 @@
 <template>
     <div class="w-full h-full relative">
-        <ShareButton :currentDraft="content" class="absolute md:block share-btn-sm ">
+        <ShareButton v-if="!hiddenSend" :currentDraft="content" class="absolute md:block share-btn-sm ">
             <div class="flex">
                 <img src="/images/messageBox.svg" class="mr-2" alt="share" /> SHARE
             </div>
@@ -57,6 +57,10 @@ export default {
         selected: {
             type: Array,
             default: []
+        },
+        hiddenSend: {
+            type: Boolean, 
+            default: false,
         }
     },
     data() {

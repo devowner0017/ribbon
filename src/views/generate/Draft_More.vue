@@ -74,7 +74,7 @@ export default {
     methods: {
         onNextPage() {
             this.$router.push({
-                path: `/done/${this.selected_id}`, 
+                path: `/done/${this.selected_id}`,
                 query: {
                     question3: this.$route.query.question3,
                     question4: this.$route.query.question4,
@@ -98,39 +98,48 @@ export default {
         }
     },
     mounted() {
-        this.isGenerating = true;
+
         // const Query1 = "How to teach the students without homework";
         // const Query2 = "How to study the maths without lesson";
         // const Query3 = "How to teach the students using computer";
-        generateAnswer(PROMPT_FOUR(this.$store.state.draft3)).then(res => {
-            let part = res.split('$');
-            this.$store.dispatch('setDraft4', part[0]);
-            this.$store.dispatch('setDraft5', part[1].substring(2));
-            this.$store.dispatch('setDraft6', part[2].substring(2));
-            this.selected_draft = part[0];
-            this.isGenerating = false;
-            // generateAnswer(`${Query2}`).then(res => {
-            //     this.$store.dispatch('setDraft5', res);
-            //     generateAnswer(`${Query3}`).then(res => {
-            //         this.$store.dispatch('setDraft6', res);
-            //         this.isGenerating = false;
+        
+        if (this.$store.state.draft4 === "" ||
+            this.$store.state.draft5 === "" ||
+            this.$store.state.draft6 === "") {
+            this.isGenerating = true;
+            generateAnswer(PROMPT_FOUR(this.$store.state.draft3)).then(res => {
+                let part = res.split('$');
+                this.$store.dispatch('setDraft4', part[0]);
+                this.$store.dispatch('setDraft5', part[1].substring(2));
+                this.$store.dispatch('setDraft6', part[2].substring(2));
+                this.selected_draft = part[0];
+                this.isGenerating = false;
+                // generateAnswer(`${Query2}`).then(res => {
+                //     this.$store.dispatch('setDraft5', res);
+                //     generateAnswer(`${Query3}`).then(res => {
+                //         this.$store.dispatch('setDraft6', res);
+                //         this.isGenerating = false;
 
-            //     }).catch(err => {
-            //         this.isGenerating = false;
-            //         console.log(err)
-            //     })
-            // }).catch(err => {
-            //     this.isGenerating = false;
-            //     console.log(err)
-            // })
-        }).catch(err => {
-            this.isGenerating = false;
-            console.log(err)
-        });
+                //     }).catch(err => {
+                //         this.isGenerating = false;
+                //         console.log(err)
+                //     })
+                // }).catch(err => {
+                //     this.isGenerating = false;
+                //     console.log(err)
+                // })
+            }).catch(err => {
+                this.isGenerating = false;
+                console.log(err)
+            });
+        } else {
+            this.onSelectDraft("4");
+        }
+
     },
     computed: {
         selected() {
-            if(this.$route.query.question4)
+            if (this.$route.query.question4)
                 return this.$route.query.question4.split(",");
         },
         mode() {

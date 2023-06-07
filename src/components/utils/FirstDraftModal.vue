@@ -4,12 +4,13 @@
             <div class="absolute w-full h-full" @click="closeDialog"></div>
             <div class="input-modal modal-wrapper">
                 <div class="modal">
-                    <div class="flex justify-center items-center md:m-14 sm:m-4 m-4">
-                        <v-progress-circular :size="32" :width="7" color="white"
-                            :indeterminate="true"></v-progress-circular>
+                    <div v-if="!isGenerated" class="flex justify-center items-center md:m-14 sm:m-4 m-4">
+                        <v-progress-circular  :size="32" :width="7" color="white"
+                            :indeterminate="!isGenerated"></v-progress-circular>
                     </div>
                     <div class="modal-title title-text title-text-sm">
-                        <div class="">Loading your first draft...</div>
+                        <div v-if="!isGenerated">Loading your first draft...</div>
+                        <div v-if="isGenerated">Your first draft is ready</div>
                     </div>
                     <div class="modal-content content-text content-text-sm">
                         <div>
@@ -57,6 +58,10 @@ export default {
             default: false
         },
         hideClose: {
+            type: Boolean,
+            default: false,
+        },
+        isGenerated: {
             type: Boolean,
             default: false,
         }
@@ -126,7 +131,7 @@ export default {
     }
 
     .input-modal {
-        padding: 0 50px 0px 24px !important
+        padding: 0 50px 0px 50px !important
     }
 
     .title-text-sm {

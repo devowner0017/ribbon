@@ -1,10 +1,8 @@
 <template>
     <button type="button" class="btn btn-primary btn-sm w-full">
-        <span v-if="!isSending">
-            {{ title }}
-        </span>
-        <v-progress-circular v-if="isSending"  color="white"
-            :indeterminate="isSending"></v-progress-circular>
+        <span v-if="!includeSlot && !isSending">{{ title }}</span>
+        <slot v-if="includeSlot"></slot>
+        <v-progress-circular v-if="isSending" :size="30" color="white" :indeterminate="isSending"></v-progress-circular>
     </button>
 </template>
 
@@ -17,6 +15,10 @@ export default {
             default: 'send'
         },
         isSending: {
+            type: Boolean,
+            default: false,
+        },
+        includeSlot: {
             type: Boolean,
             default: false,
         }

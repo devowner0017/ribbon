@@ -1,7 +1,7 @@
 <template>
     <div class="w-full my-3">
         <span class="label-text">{{ title }}</span>
-        <input :type="type" :value="value" :placeholder="placeHolder" class="w-full input-text mt-2"  v-model="model" @input="updateValue" />
+        <input :type="type" :value="value" :placeholder="placeHolder" class="w-full input-text input-text-sm mt-2" :disabled="disabled"  v-model="model" @input="updateValue" />
         <span v-if="isError" class="label-text error-text mt-2">{{ error }}</span>
     </div>
 </template>
@@ -27,6 +27,10 @@ export default {
         value: {
             type: String,
             default: ''
+        },
+        disabled: {
+            type: Boolean,
+            default: false,
         }
     },
     data() {

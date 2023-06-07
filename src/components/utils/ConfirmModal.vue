@@ -70,7 +70,7 @@ export default {
     }
 
     .confirm-modal {
-        padding: 0 50px 0px 24px !important
+        padding: 0 50px 0px 50px !important
     }
 }
 

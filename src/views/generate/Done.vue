@@ -1,10 +1,11 @@
 <template>
     <div class="flex flex-col grow">
         <MenuBar />
-        <div class="w-full flex grow grid md:grid-cols-2 sm:gird-cols-1 ">
-            <div class=" md:flex flex-col grow w-full justify-center items-center hidden">
-                <div class="form-content form-content-md form-content-sd form-content-sm">
-                    <div class="flex flex-col justify-center">
+        <div class="w-full flex grow grid md:grid-cols-2 sm:gird-cols-1 gird-cols-1">
+            <div class=" md:flex flex-col grow w-full justify-center items-center sm:hidden hidden">
+                <div
+                    class="form-content form-content-md form-content-sd form-content-sm w-full h-full flex flex-column justify-center items-center ">
+                    <div class="flex flex-col justify-center items-center">
                         <p class="header-text">
                             Thanks for using Ribbon’s AI-Powered Smart Compose Tool
                         </p>
@@ -12,37 +13,70 @@
                             Provide your email so we can send you your final version and get access to our top performing
                             email templates used by institutions like yours.
                         </p>
-                        <InputGroup title="Name" placeHolder="First and last name" :value="name"
-                            :error="errors.name" v-on:update:value="name = $event" />
-                        <InputGroup title="Email" placeHolder="Enter your email address"  :value="email" type="email"
-                            :error="errors.email" v-on:update:value="email = $event"/>
-                        <div class="flex mt-3"><SendButton title="SEND ME FINAL VERSION" :isSending="isSending" @click="sendData" :disabled="isDisabled" /></div>
-                        <div class="line my-8"></div>
-                        <p class="bottom-text-title">
-                            About Ribbon Education
-                        </p>
-                        <p class="bottom-text">
-                            Ribbon builds tools that help advisors and student facing staff quickly understand learner
-                            context and automate busy work so that your time and energy can go back to human interactions
-                            with your actual students.
-                        </p>
-                        
+                        <InputGroup title="Email" placeHolder="Enter your email address" :value="email" type="email"
+                            :disabled="sent" :error="errors.email" v-on:update:value="email = $event" />
+                        <div class="flex mt-3 w-full">
+                            <SendButton :isSending="isSending" :includeSlot="sent" @click="sendData" :disabled="isDisabled">
+                                <div class="flex items-center justify-center"><img src="/images/check.svg" class="mr-2"
+                                        width="20" height="20" alt="check" />
+                                    <span>EMAIL SENT</span>
+                                </div>
+                            </SendButton>
+                        </div>
+                        <div v-if="sendError" class="text-red-500 text-center mt-4">
+                            {{ sendError }}
+                        </div>
+                        <div class="md:block sm:hidden hidden">
+                            <div class="line my-8"></div>
+                            <p class="bottom-text-title">
+                                About Ribbon Education
+                            </p>
+                            <p class="bottom-text">
+                                Ribbon builds tools that help advisors and student facing staff quickly understand learner
+                                context and automate busy work so that your time and energy can go back to human
+                                interactions
+                                with your actual students.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="primary-panel primary-panel-md primary-panel-sd primary-panel-sm">
-                <Paper :content="selected_draft" draftNum="final" :subject="subject" :mode="mode" :selected="selected" />
+                <Paper :content="selected_draft" draftNum="final" hiddenSend :subject="subject" :mode="mode"
+                    :selected="selected" />
             </div>
+
         </div>
-        <div class=" md:hidden sm:block w-full absolue bottom-0 z-50">
-            <div class="sm-tool-bar ">
-                <div class="text-main-content mb-4">The draft is now more {{ mode }}:
-                </div>
-                <div class="grid w-full grid-cols-1">
-                    <div class="flex flex-col justify-center">
-                        <Button class="btn-primary mb-2" :onClick="onNextPage">
-                            Next: personalize m
-                        </Button>
+        <div :class="['md:hidden sm:block w-full absolue bottom-0 z-50 upper-menu', { 'upper-full': showSendMenu }]">
+            <button
+                :class="['flex flex-column items-center justify-center menu-btn', 
+                { 'union-circle-btn rounded-full bg-color-primary': !showSendMenu }, 
+                { 'close-menu-btn': showSendMenu }]"
+                @click="openMenu">
+                <span v-if="!showSendMenu"><img src="/images/union.svg" alt="union" /></span>
+                <span v-if="showSendMenu"><img src="/images/x-icon.svg" alt="union" /></span>
+            </button>
+            <div class="menu-content h-full">
+                <div class="flex flex-col justify-center items-center">
+                    <p class="header-text">
+                        Thanks for using Ribbon’s AI-Powered Smart Compose Tool
+                    </p>
+                    <p class="mid-text mt-3 mb-5">
+                        Provide your email so we can send you your final version and get access to our top performing
+                        email templates used by institutions like yours.
+                    </p>
+                    <InputGroup title="Email" placeHolder="Enter your email address" :value="email" type="email"
+                        :disabled="sent" :error="errors.email" v-on:update:value="email = $event" />
+                    <div class="flex mt-3 w-full">
+                        <SendButton :isSending="isSending" :includeSlot="sent" @click="sendData" :disabled="isDisabled">
+                            <div class="flex items-center justify-center"><img src="/images/check.svg" class="mr-2"
+                                    width="20" height="20" alt="check" />
+                                <span>EMAIL SENT</span>
+                            </div>
+                        </SendButton>
+                    </div>
+                    <div v-if="sendError" class="text-red-500 text-center mt-4">
+                        {{ sendError }}
                     </div>
                 </div>
             </div>
@@ -52,7 +86,7 @@
                     your email!</span></div>
         </v-snackbar>
     </div>
-</template>
+</template> 
 <script>
 import MenuBar from '../../components/MenuBar.vue';
 import Button from '../../components/Button.vue';
@@ -65,37 +99,39 @@ import { EMAIL_ERRORS } from '../../errors';
 import { EMPTY_ERRORS } from '../../errors';
 export default {
     components: {
-    MenuBar,
-    Button,
-    Paper,
-    ShareButton,
-    InputGroup,
-    SendButton
-},
+        MenuBar,
+        Button,
+        Paper,
+        ShareButton,
+        InputGroup,
+        SendButton
+    },
     name: 'Second Question',
     methods: {
+        openMenu() {
+            this.showSendMenu = !this.showSendMenu;
+        },
         sendData() {
-            if (EMAIL_ERRORS(this.email) || EMPTY_ERRORS(this.name) || EMPTY_ERRORS(this.email)) {
+            if (EMAIL_ERRORS(this.email) || EMPTY_ERRORS(this.email)) {
                 this.errors.email = EMAIL_ERRORS(this.email);
-                this.errors.name = EMPTY_ERRORS(this.name);
             } else {
-                this.errors = {};
-                const data = {
-                    email: this.email,
-                    name: this.name,
-                    draft: this.selected_draft
+                if (!this.sent) {
+                    this.errors = {};
+                    const data = {
+                        email: this.email,
+                        latest_draft: this.selected_draft
+                    }
+                    this.isSending = true;
+                    sendDataToHubspot(data).then(res => {
+                        this.snackbar = true;
+                        this.isSending = false;
+                        this.sendError = null;
+                        this.sent = true;
+                    }).catch((err) => {
+                        this.isSending = false;
+                        this.sendError = err;
+                    });
                 }
-                this.isSending = true;
-                sendDataToHubspot(data).then(res => {
-                    this.closeDialog();
-                    this.email = '';
-                    this.name = "";
-                    this.snackbar = true;
-                    this.isSending = false;
-                }).catch((err) => {
-                    this.isSending = false;
-                    console.log(err)
-                });
             }
         }
     },
@@ -105,7 +141,9 @@ export default {
             isSending: false,
             snackbar: false,
             errors: {},
-            name: ""
+            sendError: null,
+            sent: false,
+            showSendMenu: false,
         }
     },
     computed: {
@@ -113,7 +151,7 @@ export default {
             return this.$store.state.draft2;
         },
         selected() {
-            if(this.$route.query.question4)
+            if (this.$route.query.question4)
                 return this.$route.query.question4.split(",");
         },
         mode() {
@@ -127,11 +165,11 @@ export default {
         },
         selected_draft() {
             const selected_id = this.$route.params.selected;
-            if(selected_id==='4') {
+            if (selected_id === '4') {
                 return this.$store.state.draft4;
-            } else if(selected_id==='5') {
+            } else if (selected_id === '5') {
                 return this.$store.state.draft5;
-            } else if(selected_id==='6') {
+            } else if (selected_id === '6') {
                 return this.$store.state.draft6;
             }
         }
@@ -174,5 +212,39 @@ export default {
 
 .line {
     border: 1px solid #D2CACA;
+}
+
+.menu-btn {
+    right: 16px;
+    transition: all 0.7s ease-in-out;
+    width: 56px;
+    height: 56px;
+    position: absolute;
+}
+.union-circle-btn {
+    transform: translateY(-28px);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.close-menu-btn {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+}
+
+.upper-menu {
+    box-shadow: 0px -8px 16px rgba(0, 0, 0, 0.3);
+    background-color: white;
+    min-height: 50px;
+    height: 50px;
+    overflow: hidden;
+    transition: height 0.7s ease-in-out;
+}
+
+.menu-content {
+    padding: 52px 24px 0px 24px;
+}
+
+.upper-full {
+    height: 100% !important;
 }
 </style>

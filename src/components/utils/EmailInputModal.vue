@@ -74,7 +74,7 @@ export default {
     width:100% !important;
    }
    .input-modal {
-    padding:0 50px 0px 24px !important
+    padding:0 50px 0px 50px !important
    }
 }
 .modal-background {

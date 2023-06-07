@@ -22,7 +22,7 @@
             </div>
             <LoadingPanel v-if="isGenerating" />
         </div>
-        <FirstDraftModal :showModal="isModalVisible" @close="closeModal"/>
+        <FirstDraftModal :showModal="isModalVisible" @close="closeModal" :isGenerated="isGenerated" />
     </div>
 </template>
 <script>
@@ -39,30 +39,25 @@ export default {
             question2: "",
             answer: "",
             isGenerating: false,
+            isGenerated: false,
             isModalVisible: false,
         }
     },
     components: {
-    MenuBar,
-    Button,
-    LoadingPanel,
-    DisablePanel,
-    FirstDraftModal
-},
+        MenuBar,
+        Button,
+        LoadingPanel,
+        DisablePanel,
+        FirstDraftModal
+    },
     name: 'tow-question',
     methods: {
         redirectToPage() {
             //this.$router.push('/questions/3');
         },
-        draftClick() {
+        checkNext() {
             const question1 = this.$route.query.question1;
-            this.isGenerating = true;
-            this.openModal();
-            const prompt = PROMPT_ONE(question1, this.question2);
-            this.answer = generateAnswer(prompt).then(res => {
-                this.isGenerating = false;
-                this.closeModal();
-                this.$store.dispatch('setDraft1', res);
+            if (this.isModalVisible === false && this.isGenerated === true) {
                 this.$router.push({
                     path: '/questions/3',
                     query: {
@@ -70,6 +65,18 @@ export default {
                         question2: this.question2,
                     }
                 });
+            }
+        },
+        draftClick() {
+            const question1 = this.$route.query.question1;
+            this.isGenerating = true;
+            this.openModal();
+            const prompt = PROMPT_ONE(question1, this.question2);
+            this.answer = generateAnswer(prompt).then(async res => {
+                this.isGenerating = false;
+                this.isGenerated = true;
+                this.$store.dispatch('setDraft1', res);
+                this.checkNext();
             }).catch(err => {
                 this.isGenerating = false;
                 console.log(err)
@@ -81,6 +88,11 @@ export default {
         closeModal() {
             this.isModalVisible = false;
         },
+    },
+    watch: {
+        isModalVisible(newValue, oldValue) {
+            this.checkNext();
+        }
     },
     computed: {
         isDisabled() {

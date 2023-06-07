@@ -4,7 +4,7 @@
         <div class="w-full flex grow grid md:grid-cols-2 sm:gird-cols-1 ">
             <div class="md:flex flex-col grow w-full justify-center items-center hidden">
                 <div class="form-content form-content-md form-content-sd form-content-sm">
-                    <div class="text-main-content mb-4 w-full">The messaging has been updated for a leaner who <b
+                    <div class="text-main-content mb-4 w-full">The messaging has been updated for a learner who <b
                             class="text-color-primary">{{ selectedQuery() }}.</b>
                     </div>
                     <div class="flex flex-col justify-center">
@@ -20,7 +20,7 @@
         </div>
         <div class=" md:hidden sm:block w-full absolue bottom-0 z-50">
             <div class="sm-tool-bar ">
-                <div class="text-main-content mb-4">he messaging has been updated for a leaner who <b
+                <div class="text-main-content mb-4">The messaging has been updated for a learner who <b
                         class="text-color-primary">{{ selectedQuery() }}.</b>
                 </div>
                 <div class="grid w-full grid-cols-1">
@@ -32,7 +32,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 <script>
