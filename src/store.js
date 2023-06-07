@@ -4,8 +4,11 @@ const store = new Vuex.Store({
   state() {
     return {
       draft1: '',
+      prompt1: '',
       draft2: '',
+      prompt2: '',
       draft3: '',
+      prompt3: '',
       draft4: '',
       draft5: '',
       draft6: '',
@@ -13,14 +16,27 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
+    //-----first draft---------------------
     setDraft1(state, draft) {
       state.draft1 = draft;
     },
+    setPrompt1(state, prompt) {
+      state.prompt1 = prompt;
+    },
+    //-----seconde draft-------------------
     setDraft2(state, draft) {
       state.draft2 = draft;
     },
+    setPrompt2(state, prompt) {
+      state.prompt2 = prompt;
+    },
+    //-----third draft--------------------
     setDraft3(state, draft) {
       state.draft3 = draft;
+    },
+    //------------------------------------
+    setPrompt3(state, prompt) {
+      state.prompt3 = prompt;
     },
     setDraft4(state, draft) {
       state.draft4 = draft;
@@ -33,15 +49,28 @@ const store = new Vuex.Store({
     },
   },
   actions: {
+    //-----------first draft--------------------------
     setDraft1(context, draft) {
       context.commit('setDraft1', draft)
     },
+    setPrompt1(context, prompt) {
+      context.commit('setPrompt1', prompt)
+    },
+    //-----------second draft--------------------------
     setDraft2(context, draft) {
       context.commit('setDraft2', draft)
     },
+    setPrompt2(context, prompt) {
+      context.commit('setPrompt2', prompt)
+    },
+    //-----------third draft--------------------------
     setDraft3(context, draft) {
       context.commit('setDraft3', draft)
     },
+    setPrompt3(context, prompt) {
+      context.commit('setPrompt3', prompt)
+    },
+    //------------------------------------------------
     setDraft4(context, draft) {
       context.commit('setDraft4', draft)
     },

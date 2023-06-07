@@ -107,7 +107,7 @@ export default {
             this.$store.state.draft5 === "" ||
             this.$store.state.draft6 === "") {
             this.isGenerating = true;
-            generateAnswer(PROMPT_FOUR(this.$store.state.draft3)).then(res => {
+            generateAnswer(PROMPT_FOUR(this.$store.state.draft3, this.$store.state.prompt3)).then(res => {
                 let part = res.split('$');
                 this.$store.dispatch('setDraft4', part[0]);
                 this.$store.dispatch('setDraft5', part[1].substring(2));

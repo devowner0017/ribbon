@@ -76,6 +76,7 @@ export default {
                 this.isGenerating = false;
                 this.isGenerated = true;
                 this.$store.dispatch('setDraft1', res);
+                this.$store.dispatch('setPrompt1', prompt);
                 this.checkNext();
             }).catch(err => {
                 this.isGenerating = false;

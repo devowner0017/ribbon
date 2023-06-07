@@ -41,17 +41,24 @@ export const PROMPT_ONE = (question1, question2) => {
     else if (question1.toUpperCase() === A_CONCERNING_GRADE) return PROMPT_ONE_A_CONCERNING_GRADE(question2);
 }
 //------------------------------------------------------------------------------
-export const PROMPT_TWO = (draft, tone) => {
-    return `Rewrite answer about answer "${draft}" in a more ${tone} tone. And Don't remove the subject. `
+export const PROMPT_TWO = (draft, beforePrompt, tone) => {
+    return `"${draft}"\n This email is created by the prompt "${beforePrompt}".
+     Rewrite about above email in a more ${tone} tone. And Don't remove the subject. `
 }
 //--------------------------------------------------------------------------------
-export const PROMPT_THREE = (draft, selection) => {
-    let prompt = `${draft}\n Update the above email by knowing information such as `;
+export const PROMPT_THREE = (draft, beforePrompt, selection) => {
+    let prompt = `${draft}\n This email is created by the prompt "${beforePrompt}". Update the above email by knowing information such as `;
     selection.forEach(item => prompt += `"${item}", `);
     prompt += " about the learner. And Don't remove the subject.";
     return prompt;
 }
 //--------------------------------------------------------------------------------
-export const PROMPT_FOUR = (draft) => {
-    return `Now give me 3 of "${draft}" varying by tone, length and level of detail: Separate each email by inserting a "$" at the end of the email and only write email content and subject that have not any number('1)', '2)', '3)').`;
+export const PROMPT_FOUR = (draft, beforePrompt) => {
+    return `"${draft}"\n This email is created by the prompt "${beforePrompt}". 
+    Now give me three version of above email varying by tone, length and level of detail.
+    Separate each email by inserting a "$" at the end of the email.
+    And Don't remove the subject.
+    Never use words that are not related to  email.
+    example: version, version number
+    `;
 }

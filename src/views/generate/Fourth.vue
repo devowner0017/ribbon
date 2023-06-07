@@ -112,7 +112,7 @@ export default {
         makeDraft3() {
             this.isGenerating = true;
             if (this.noApplyDisabled) {
-                const prompt = PROMPT_THREE(this.$store.state.draft2, this.selected);
+                const prompt = PROMPT_THREE(this.$store.state.draft2, this.$store.state.prompt2, this.selected);
                 let _selected = "";
                 for(let i = 0; i < this.selected.length; i++) {
                     if(this.selected.length < 2) {
@@ -128,6 +128,7 @@ export default {
                 this.answer = generateAnswer(`${prompt}`).then(res => {
                     this.isGenerating = false;
                     this.$store.dispatch('setDraft3', res);
+                    this.$store.dispatch('setPrompt3', prompt);
                     this.$router.push({
                         path: `/questions/4/draft3/${_selected}`,
                         query: {
@@ -141,7 +142,8 @@ export default {
                     console.log(err)
                 });
             } else {
-                this.$store.dispatch('setDraft3', this.$store.state.draft2)
+                this.$store.dispatch('setDraft3', this.$store.state.draft2);
+                this.$store.dispatch('setPrompt3', this.$store.state.prompt2);
                 this.$router.push({
                     path: `/generate_three_version`,
                     query: {

@@ -79,10 +79,11 @@ export default {
         makeDraft2(tone) {
             this.isGenerating = true;
             if (tone != "looks_good") {
-                const prompt = PROMPT_TWO(this.$store.state.draft1, tone);
+                const prompt = PROMPT_TWO(this.$store.state.draft1, this.$store.state.prompt1, tone);
                 this.answer = generateAnswer(prompt).then(res => {
                     this.isGenerating = false;
                     this.$store.dispatch('setDraft2', res);
+                    this.$store.dispatch('setPrompt2', prompt);
                     this.$router.push({
                         path: `/questions/3/draft2/${tone}`,
                         query: {
@@ -95,7 +96,8 @@ export default {
                     console.log(err)
                 });
             } else {
-                this.$store.dispatch('setDraft2', this.$store.state.draft1)
+                this.$store.dispatch('setDraft2', this.$store.state.draft1);
+                this.$store.dispatch('setPrompt2', this.$store.state.prompt1);
                 this.$router.push({
                     path: `/questions/3/draft2/${tone}`,
                     query: {
