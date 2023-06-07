@@ -110,8 +110,10 @@ export default {
             generateAnswer(PROMPT_FOUR(this.$store.state.draft3, this.$store.state.prompt3)).then(res => {
                 let part = res.split('$');
                 this.$store.dispatch('setDraft4', part[0]);
-                this.$store.dispatch('setDraft5', part[1].substring(2));
-                this.$store.dispatch('setDraft6', part[2].substring(2));
+                let index1 = part[1].indexOf('S');
+                let index2 = part[2].indexOf('S');
+                this.$store.dispatch('setDraft5', part[1].slice(index1));
+                this.$store.dispatch('setDraft6', part[2].slice(index2));
                 this.selected_draft = part[0];
                 this.isGenerating = false;
                 // generateAnswer(`${Query2}`).then(res => {
