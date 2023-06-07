@@ -25,6 +25,9 @@
         <div class="d-flex mt-5">
             <SendButton title="share" :isSending="isSending" @click="sendData" :disabled="isDisabled"/>
         </div>
+        <div v-if="sendError" class="text-red-500 text-center mt-4">
+            {{ sendError }}
+        </div>
     </Modal>
     <AboutModal :showModal="isAboutModalVisible" @close="closeAboutModal"></AboutModal>
     <v-snackbar v-model="snackbar" :timeout="3000">
@@ -37,7 +40,7 @@ import AboutModal from './utils/AboutModal.vue';
 import Modal from './utils/Modal.vue';
 import InputGroup from './InputGroup.vue';
 import SendButton from './SendButton.vue';
-import { EMAIL_ERRORS } from '../errors';
+import { EMAIL_ERRORS, NAME_ERRORS } from '../errors';
 import { sendDataToHubspot } from '../actions/hubspot';
 export default {
     name: 'Navbar',
@@ -51,7 +54,8 @@ export default {
             emails: "",
             isSending: false,
             snackbar: false,
-            errors: {}
+            errors: {},
+            sendError: null,
         }
     },
     methods: {
@@ -68,14 +72,17 @@ export default {
             this.isShareModalVisible = false;
         },
         sendData() {
-            if (EMAIL_ERRORS(this.email)) {
+            if (EMAIL_ERRORS(this.email) || NAME_ERRORS(this.name)) {
                 this.errors.email = EMAIL_ERRORS(this.email);
+                this.errors.name = NAME_ERRORS(this.name);
             } else {
                 this.errors = {};
+                const names = this.name.trim().split(' ');
                 const data = {
                     email: this.email,
-                    name: this.name,
-                    emails: this.emails,
+                    firstname: names[0],
+                    lastname: names[1],
+                    latest_draft: this.emails,
                 }
                 this.isSending = true;
                 sendDataToHubspot(data).then(res => {
@@ -85,9 +92,10 @@ export default {
                     this.emails = '';
                     this.snackbar = true;
                     this.isSending = false;
+                    this.sendError = null;
                 }).catch((err) => {
                     this.isSending = false;
-                    console.log(err)
+                    this.sendError = err;
                 });
             }
         }

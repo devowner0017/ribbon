@@ -8,6 +8,9 @@
         <div class="d-flex mt-">
             <SendButton :isSending="isSending" @click="sendData" :disabled="isDisabled" />
         </div>
+        <div v-if="sendError" class="text-red-500 text-center mt-4">
+            {{ sendError }}
+        </div>
     </Modal>
     <v-snackbar v-model="snackbar" :timeout="3000">
         <div class="flex items-center"><img src="/images/check.svg" class="mr-2" alt="check" /> <span>Draft has been sent to
@@ -40,7 +43,8 @@ export default {
             email: "",
             snackbar: false,
             isSending: false,
-            errors: {}
+            errors: {},
+            sendError: null,
         };
     },
     methods: {
@@ -57,7 +61,7 @@ export default {
                 this.errors = {};
                 const data = {
                     email: this.email,
-                    draft: this.currentDraft
+                    latest_draft: this.currentDraft
                 }
                 this.isSending = true;
                 sendDataToHubspot(data).then(res => {
@@ -65,8 +69,10 @@ export default {
                     this.email = '';
                     this.snackbar = true;
                     this.isSending = false;
+                    this.sendError = null;
                 }).catch((err) => {
                     this.isSending = false;
+                    this.sendError = err;
                     console.log(err)
                 });
             }

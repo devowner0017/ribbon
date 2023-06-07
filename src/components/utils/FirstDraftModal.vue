@@ -21,6 +21,9 @@
                         <div class="d-flex mt-">
                             <SendButton :isSending="isSending" @click="sendData" :disabled="isDisabled" />
                         </div>
+                        <div v-if="sendError" class="text-red-500 text-center mt-4">
+                            {{ sendError }}
+                        </div>
                         <div class="d-flex mt-3">
                             <button type="button" class="btn btn-secondary btn-sm w-full" @click="closeDialog">Maybe
                                 later</button>
@@ -66,7 +69,7 @@ export default {
             errors: {},
             isSending: false,
             snackbar: false,
-
+            sendError: null,
         }
     },
     methods: {
@@ -88,9 +91,10 @@ export default {
                     this.email = '';
                     this.snackbar = true;
                     this.isSending = false;
+                    this.sendError = null;
                 }).catch((err) => {
                     this.isSending = false;
-                    console.log(err)
+                    this.sendError = err;
                 });
             }
         }

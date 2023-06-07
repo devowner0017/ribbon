@@ -7,4 +7,9 @@ export const EMPTY_ERRORS = (string) => {
     if (validator.isEmpty(string)) {
         return "This field is required";
     } else return false;
-} 
+};
+export const NAME_ERRORS = (string) => {
+    if (string.trim().split(" ").length < 2) {
+        return "Input lastname!"
+    } 
+}
