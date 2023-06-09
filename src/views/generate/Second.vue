@@ -20,7 +20,7 @@
                 </div>
                 <DisablePanel v-if="isGenerating" />
             </div>
-            <LoadingPanel v-if="isGenerating" />
+            <LoadingPanel v-if="isGenerating" :indeterminate="isGenerating&&!isModalVisible"  />
         </div>
         <FirstDraftModal :showModal="isModalVisible" @close="closeModal" :isGenerated="isGenerated" />
     </div>

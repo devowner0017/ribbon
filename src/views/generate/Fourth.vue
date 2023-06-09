@@ -29,9 +29,9 @@
                 </div>
             </div>
             <div v-if="!isGenerating" class="primary-panel primary-panel-md primary-panel-sd primary-panel-sm">
-                <Paper :content="draft" draftNum="3" :mode="mode" :subject="subject" />
+                <Paper :content="draft" draftNum="2" :mode="mode" :subject="subject" />
             </div>
-            <LoadingPanel v-if="isGenerating" />
+            <LoadingPanel v-if="isGenerating" :indeterminate="isGenerating && !isModalVisible" />
         </div>
         <div class=" md:hidden sm:block w-full absolue bottom-0 z-50">
             <div class="sm-tool-bar ">
@@ -41,8 +41,8 @@
                     <div class="grid w-fill grid-cols-3">
                         <CheckCard text="holds a job" :isSelected="selected.includes('Hold a job')"
                             :disabled="otherCardDisabled" @click="select('Hold a job')" />
-                        <CheckCard text="caretaker" :isSelected="selected.includes('Caretaker')" :disabled="otherCardDisabled"
-                            @click="select('Caretaker')" />
+                        <CheckCard text="caretaker" :isSelected="selected.includes('Caretaker')"
+                            :disabled="otherCardDisabled" @click="select('Caretaker')" />
                         <CheckCard text="recent illness" :isSelected="selected.includes('Recent illness')"
                             :disabled="otherCardDisabled" @click="select('Recent illness')" />
                     </div>
@@ -61,9 +61,8 @@
                 </div>
                 <DisablePanel v-if="isGenerating" />
             </div>
-
         </div>
-
+        <DraftModal :showModal="isModalVisible" @close="closeModal" :isGenerated="isGenerated" />
     </div>
 </template>
 <script>
@@ -74,8 +73,9 @@ import Paper from '../../components/Paper.vue';
 import ShareButton from '../../components/ShareButton.vue';
 import DisablePanel from '../../components/utils/DisablePanel.vue';
 import LoadingPanel from '../../components/utils/LoadingPanel.vue';
+import DraftModal from '../../components/utils/DraftModal.vue';
 import generateAnswer from '../../actions/generate';
-import { HOLD_A_JOB, CARETAKER, RECENT_ILLNESS, RECENT_TRAVEL, TOOK_TIME_OFF, PROMPT_THREE } from '../../prompts';
+import { HOLD_A_JOB, CARETAKER, RECENT_ILLNESS, RECENT_TRAVEL, TOOK_TIME_OFF, PROMPT_THREE, PROMPT_FOUR } from '../../prompts';
 export default {
     components: {
         MenuBar,
@@ -84,18 +84,22 @@ export default {
         ShareButton,
         CheckCard,
         DisablePanel,
-        LoadingPanel
+        LoadingPanel,
+        DraftModal
     },
     name: 'four-question',
     data() {
         return {
             selected: [],
             isGenerating: false,
+            isGenerated: false,
+            isModalVisible: false,
             hold_a_job: HOLD_A_JOB,
             caretaker: CARETAKER,
             recent_illness: RECENT_ILLNESS,
             recent_travel: RECENT_TRAVEL,
             took_time_off: TOOK_TIME_OFF,
+            select_url: null,
         }
     },
     methods: {
@@ -109,41 +113,26 @@ export default {
                 }
             }
         },
-        makeDraft3() {
-            this.isGenerating = true;
-            if (this.noApplyDisabled) {
-                const prompt = PROMPT_THREE(this.$store.state.draft2, this.$store.state.prompt2, this.selected);
-                let _selected = "";
-                for(let i = 0; i < this.selected.length; i++) {
-                    if(this.selected.length < 2) {
-                        _selected +=this.selected[i];
-                    } else {
-                        if( i < this.selected.length - 1) {
-                            _selected +=this.selected[i] + ", "
-                        } else {
-                            _selected +=this.selected[i];
-                        }
+        openModal() {
+            this.isModalVisible = true;
+        },
+        closeModal() {
+            this.isModalVisible = false;
+        },
+        checkNext1() {
+            if (this.isModalVisible === false && this.isGenerated === true) {
+                this.$router.push({
+                    path: `/questions/4/draft3/${this.select_url}`,
+                    query: {
+                        question1: this.$route.query.question1,
+                        question2: this.$route.query.question2,
+                        question3: this.$route.query.question3,
                     }
-                }
-                this.answer = generateAnswer(`${prompt}`).then(res => {
-                    this.isGenerating = false;
-                    this.$store.dispatch('setDraft3', res);
-                    this.$store.dispatch('setPrompt3', prompt);
-                    this.$router.push({
-                        path: `/questions/4/draft3/${_selected}`,
-                        query: {
-                            question1: this.$route.query.question1,
-                            question2: this.$route.query.question2,
-                            question3: this.$route.query.question3,
-                        }
-                    });
-                }).catch(err => {
-                    this.isGenerating = false;
-                    console.log(err)
                 });
-            } else {
-                this.$store.dispatch('setDraft3', this.$store.state.draft2);
-                this.$store.dispatch('setPrompt3', this.$store.state.prompt2);
+            }
+        },
+        checkNext2() {
+            if (this.isModalVisible === false && this.isGenerated === true) {
                 this.$router.push({
                     path: `/generate_three_version`,
                     query: {
@@ -153,8 +142,66 @@ export default {
                     }
                 });
             }
+        },
+        makeDraft3() {
+            this.isGenerating = true;
+            if (this.noApplyDisabled) {
+                this.openModal();
+                const prompt = PROMPT_THREE(this.$store.state.draft2, this.$store.state.prompt2, this.selected);
+                let _selected = "";
+                for (let i = 0; i < this.selected.length; i++) {
+                    if (this.selected.length < 2) {
+                        _selected += this.selected[i];
+                    } else {
+                        if (i < this.selected.length - 1) {
+                            _selected += this.selected[i] + ", "
+                        } else {
+                            _selected += this.selected[i];
+                        }
+                    }
+                }
+                this.select_url = _selected;
+                this.answer = generateAnswer(`${prompt}`).then(res => {
+                    this.isGenerating = false;
+                    this.isGenerated = true;
+                    this.$store.dispatch('setDraft3', res);
+                    this.$store.dispatch('setPrompt3', prompt);
+                    this.checkNext1();
+                }).catch(err => {
+                    this.isGenerating = false;
+                    console.log(err)
+                });
+            } else {
+                this.$store.dispatch('setDraft3', this.$store.state.draft2);
+                this.$store.dispatch('setPrompt3', this.$store.state.prompt2);
+                this.isGenerating = true;
+                this.openModal();
+                generateAnswer(PROMPT_FOUR(this.$store.state.draft2, this.$store.state.prompt2)).then(res => {
+                    let part = res.split('$');
+                    this.$store.dispatch('setDraft4', part[0]);
+                    let index1 = part[1].indexOf('S');
+                    let index2 = part[2].indexOf('S');
+                    this.$store.dispatch('setDraft5', part[1].slice(index1));
+                    this.$store.dispatch('setDraft6', part[2].slice(index2));
+                    this.isGenerating = false;
+                    this.isGenerated = true;
+                    this.checkNext2()
+                }).catch(err => {
+                    this.isGenerating = false;
+                    console.log(err)
+                });
+            }
         }
 
+    },
+    watch: {
+        isModalVisible(newValue, oldValue) {
+            if (this.noApplyDisabled) {
+                this.checkNext1();
+            } else {
+                this.checkNext2();
+            }
+        }
     },
     computed: {
         draft() {

@@ -19,7 +19,7 @@
             <div v-if="!isGenerating" class="primary-panel primary-panel-md primary-panel-sd primary-panel-sm">
                 <Paper :content="draft" draftNum="1" :subject="subject" />
             </div>
-            <LoadingPanel v-if="isGenerating" />
+            <LoadingPanel v-if="isGenerating" :indeterminate="isGenerating&&!isModalVisible"/>
         </div>
         <div class="md:hidden sm:block w-full absolue bottom-0 z-50">
             <div class="sm-tool-bar ">
@@ -27,7 +27,8 @@
                 </div>
                 <div class="grid w-full grid-cols-2">
                     <div class="m-1">
-                        <ToggleCard text="professional" icon="/images/professional.svg" @click="makeDraft2('Professional')" />
+                        <ToggleCard text="professional" icon="/images/professional.svg"
+                            @click="makeDraft2('Professional')" />
                     </div>
                     <div class="m-1">
                         <ToggleCard text="supportive" icon="/images/supportive.svg" @click="makeDraft2('Supportive')" />
@@ -42,7 +43,7 @@
             </div>
             <DisablePanel v-if="isGenerating" />
         </div>
-
+        <DraftModal :showModal="isModalVisible" @close="closeModal" :isGenerated="isGenerated" />
     </div>
 </template>
 <script>
@@ -56,6 +57,7 @@ import DisablePanel from '../../components/utils/DisablePanel.vue';
 import LoadingPanel from '../../components/utils/LoadingPanel.vue';
 import { PROFESSIONAL, SUPPORTIVE, UPBEAT } from '../../prompts';
 import { PROMPT_TWO } from '../../prompts';
+import DraftModal from '../../components/utils/DraftModal.vue';
 export default {
     components: {
         ToggleCard,
@@ -64,7 +66,8 @@ export default {
         Paper,
         ShareButton,
         DisablePanel,
-        LoadingPanel
+        LoadingPanel,
+        DraftModal
     },
     name: 'three-question',
     data() {
@@ -73,24 +76,30 @@ export default {
             supportive: SUPPORTIVE,
             upbeat: UPBEAT,
             isGenerating: false,
+            isGenerated: false,
+            isModalVisible: false,
+            tone: null,
         }
     },
     methods: {
+        openModal() {
+            this.isModalVisible = true;
+        },
+        closeModal() {
+            this.isModalVisible = false;
+        },
         makeDraft2(tone) {
-            this.isGenerating = true;
+            this.isGenerating = true;     
             if (tone != "looks_good") {
+                this.openModal();
+                this.tone = tone;
                 const prompt = PROMPT_TWO(this.$store.state.draft1, this.$store.state.prompt1, tone);
                 this.answer = generateAnswer(prompt).then(res => {
                     this.isGenerating = false;
                     this.$store.dispatch('setDraft2', res);
                     this.$store.dispatch('setPrompt2', prompt);
-                    this.$router.push({
-                        path: `/questions/3/draft2/${tone}`,
-                        query: {
-                            question1: this.$route.query.question1,
-                            question2: this.$route.query.question2,
-                        }
-                    });
+                    this.isGenerated = true;
+                    this.checkNext();
                 }).catch(err => {
                     this.isGenerating = false;
                     console.log(err)
@@ -106,6 +115,23 @@ export default {
                     }
                 });
             }
+        },
+        checkNext() {
+            if (this.isModalVisible === false && this.isGenerated === true) {
+                this.$router.push({
+                    path: `/questions/3/draft2/${this.tone}`,
+                    query: {
+                        question1: this.$route.query.question1,
+                        question2: this.$route.query.question2,
+                    }
+                });
+            }
+        },
+       
+    },
+    watch: {
+        isModalVisible(newValue, oldValue) {
+            this.checkNext();
         }
     },
     computed: {
