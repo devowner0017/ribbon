@@ -1,8 +1,9 @@
 import axios from "axios";
+import { SERVER_URL } from "./config";
 
 export default function generateAnswer(question) {
     return new Promise((resolve, reject) => {
-         axios.post(`https://ribbon-app-gfoo7.ondigitalocean.app/api/chatgpt`, {"question": question}).then( res => {
+         axios.post(`${SERVER_URL}/api/chatgpt`, {"question": question}).then( res => {
             resolve(res.data)
         }).catch((error) => {
             console.log(error.data);
