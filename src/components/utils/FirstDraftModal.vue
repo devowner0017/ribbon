@@ -50,6 +50,7 @@ import InputGroup from '../InputGroup.vue';
 import { EMAIL_ERRORS } from '../../errors';
 import { sendDataToHubspot } from '../../actions/hubspot';
 import SendButton from '../SendButton.vue';
+import { SEND_EMAIL_ID } from '../../actions/config';
 export default {
     props: {
         title: String,
@@ -91,7 +92,7 @@ export default {
                     email: this.email,
                 }
                 this.isSending = true;
-                sendDataToHubspot(data).then(res => {
+                sendDataToHubspot(SEND_EMAIL_ID, data).then(res => {
                     this.closeDialog();
                     this.email = '';
                     this.snackbar = true;

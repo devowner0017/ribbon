@@ -25,6 +25,7 @@ import InputGroup from './InputGroup.vue';
 import SendButton from './SendButton.vue';
 import { sendDataToHubspot } from '../actions/hubspot';
 import { EMAIL_ERRORS } from '../errors';
+import { SEND_DRAFT_ID } from '../actions/config';
 export default {
     name: "ShareButton",
     props: {
@@ -64,7 +65,7 @@ export default {
                     latest_draft: this.currentDraft
                 }
                 this.isSending = true;
-                sendDataToHubspot(data).then(res => {
+                sendDataToHubspot(SEND_DRAFT_ID, data).then(res => {
                     this.closeModal();
                     this.email = '';
                     this.snackbar = true;

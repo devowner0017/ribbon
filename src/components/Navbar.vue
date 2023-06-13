@@ -42,6 +42,7 @@ import InputGroup from './InputGroup.vue';
 import SendButton from './SendButton.vue';
 import { EMAIL_ERRORS, NAME_ERRORS } from '../errors';
 import { sendDataToHubspot } from '../actions/hubspot';
+import { SHARE_EMAIL_ID } from '../actions/config';
 export default {
     name: 'Navbar',
     components: { Button, AboutModal, Modal, InputGroup, SendButton },
@@ -85,7 +86,7 @@ export default {
                     latest_draft: this.emails,
                 }
                 this.isSending = true;
-                sendDataToHubspot(data).then(res => {
+                sendDataToHubspot(SHARE_EMAIL_ID, data).then(res => {
                     this.closeShareModal();
                     this.email = '';
                     this.name = '';

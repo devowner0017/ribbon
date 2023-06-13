@@ -97,6 +97,7 @@ import SendButton from '../../components/SendButton.vue';
 import { sendDataToHubspot } from '../../actions/hubspot';
 import { EMAIL_ERRORS } from '../../errors';
 import { EMPTY_ERRORS } from '../../errors';
+import { SEND_FINAL_DRAFT_ID } from '../../actions/config';
 export default {
     components: {
         MenuBar,
@@ -122,7 +123,7 @@ export default {
                         latest_draft: this.selected_draft
                     }
                     this.isSending = true;
-                    sendDataToHubspot(data).then(res => {
+                    sendDataToHubspot( SEND_FINAL_DRAFT_ID, data).then(res => {
                         this.snackbar = true;
                         this.isSending = false;
                         this.sendError = null;
