@@ -11,6 +11,10 @@ export default {
         isGenerated: {
             type: Boolean,
             default: false,
+        },
+        id: {
+            type: String,
+            default: '1',
         }
     },
     data() {
@@ -20,12 +24,33 @@ export default {
             currentHeadline: "",
             currentBody: "",
             pageCount: 0,
+            start: 0,
+            end: 0,
         }
     },
     mounted() {
         this.pageCount = tips.length;
-        this.currentHeadline = tips[0].headline;
-        this.currentBody = tips[0].body;
+        if (this.id === '1') {
+            this.start = 1;
+            this.end = 3;
+            this.currentPage = 1;
+            this.currentHeadline = tips[0].headline;
+            this.currentBody = tips[0].body;
+
+        } else if (this.id === '2') {
+            this.start = 4;
+            this.end = 6;
+            this.currentPage = 4;
+            this.currentHeadline = tips[3].headline;
+            this.currentBody = tips[3].body;
+        } else if (this.id === '3') {
+            this.start = 7;
+            this.end = 10;
+            this.currentPage = 7;
+            this.currentHeadline = tips[6].headline;
+            this.currentBody = tips[6].body;
+        }
+
     },
     methods: {
         closeDialog() {
@@ -38,12 +63,12 @@ export default {
 
         },
         nextPage() {
-            if (this.currentPage < this.pageCount) {
+            if (this.currentPage < this.end) {
                 this.currentPage++;
             }
         },
         previousPage() {
-            if (this.currentPage > 1) {
+            if (this.currentPage > this.start) {
                 this.currentPage--;
             }
         }
@@ -53,8 +78,8 @@ export default {
             this.dialogVisible = newValue;
         },
         currentPage(newValue) {
-            this.currentHeadline = tips[newValue-1].headline;
-            this.currentBody = tips[newValue-1].body;
+            this.currentHeadline = tips[newValue - 1].headline;
+            this.currentBody = tips[newValue - 1].body;
         }
     },
 }
@@ -85,10 +110,10 @@ export default {
                                 {{ currentBody }}
                             </div>
                             <div class="flex justify-between">
-                                <button type="button" class="btn btn-secondary font-small-caps" :disabled="currentPage <= 1"
+                                <button type="button" class="btn btn-secondary font-small-caps" :disabled="currentPage <= start"
                                     v-on:click="previousPage">PREVIOUS</button>
                                 <button type="button" class="btn btn-primary font-small-caps"
-                                    :disabled="currentPage >= pageCount" v-on:click="nextPage">NEXT</button>
+                                    :disabled="currentPage >= end" v-on:click="nextPage">NEXT</button>
                             </div>
                         </div>
                     </div>
@@ -121,6 +146,7 @@ export default {
 .content {
     min-height: 150px;
 }
+
 .content-text {
     font-family: 'Outfit';
     font-style: normal;

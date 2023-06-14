@@ -62,7 +62,7 @@
                 <DisablePanel v-if="isGenerating" />
             </div>
         </div>
-        <DraftModal :showModal="isModalVisible" @close="closeModal" :isGenerated="isGenerated" />
+        <DraftModal :showModal="isModalVisible" id="2" @close="closeModal" :isGenerated="isGenerated" />
     </div>
 </template>
 <script>
@@ -161,7 +161,7 @@ export default {
                     }
                 }
                 this.select_url = _selected;
-                this.answer = generateAnswer(`${prompt}`).then(res => {
+                this.answer = generateAnswer(`${prompt}`, "3").then(res => {
                     this.isGenerating = false;
                     this.isGenerated = true;
                     this.$store.dispatch('setDraft3', res);
@@ -176,7 +176,7 @@ export default {
                 this.$store.dispatch('setPrompt3', this.$store.state.prompt2);
                 this.isGenerating = true;
                 this.openModal();
-                generateAnswer(PROMPT_FOUR(this.$store.state.draft2, this.$store.state.prompt2)).then(res => {
+                generateAnswer(PROMPT_FOUR(this.$store.state.draft2, this.$store.state.prompt2), '4-6').then(res => {
                     let part = res.split('$');
                     this.$store.dispatch('setDraft4', part[0]);
                     let index1 = part[1].indexOf('S');

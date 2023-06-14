@@ -35,7 +35,7 @@
                 <DisablePanel v-if="isGenerating" />
             </div>
         </div>
-        <DraftModal :showModal="isModalVisible" @close="closeModal" :isGenerated="isGenerated" />
+        <DraftModal :showModal="isModalVisible" id="3" @close="closeModal" :isGenerated="isGenerated" />
     </div>
 </template>
 <script>
@@ -87,11 +87,24 @@ export default {
                 })
             }
         },
-
+        convertSelected(select) {
+           console.log(select)
+            if(select.trim()==='Recent travel') {
+                return 'had a recent travel';
+            } else if(select.trim()==='Caretaker') {
+                return 'is a caretaker'
+            } else if(select.trim()==='Holds a job') {
+                return 'holds a job';
+            } else if(select.trim()==='Recent illness') {
+                return 'had a recent illness';
+            } else if(select.trim()==='Took time off') {
+                return 'took time off';
+            } 
+        },
         onNextPage() {
             this.isGenerating = true;
             this.openModal();
-            generateAnswer(PROMPT_FOUR(this.$store.state.draft3, this.$store.state.prompt3)).then(res => {
+            generateAnswer(PROMPT_FOUR(this.$store.state.draft3, this.$store.state.prompt3), '4-6').then(res => {
                 let part = res.split('$');
                 this.$store.dispatch('setDraft4', part[0]);
                 let index1 = part[1].indexOf('S');
@@ -114,14 +127,14 @@ export default {
             let question4 = "";
             for (let i = 0; i < this.selected.length; i++) {
                 if (this.selected.length < 2) {
-                    question4 += this.selected[i];
+                    question4 +=  this.convertSelected(this.selected[i]);
                 } else {
                     if (i < this.selected.length - 2) {
-                        question4 += this.selected[i] + ", "
+                        question4 += this.convertSelected(this.selected[i]) + ", "
                     } else if (i == this.selected.length - 2) {
-                        question4 += this.selected[i] + " and "
+                        question4 += this.convertSelected(this.selected[i]) + " and "
                     } else {
-                        question4 += this.selected[i];
+                        question4 += this.convertSelected(this.selected[i]);
                     }
                 }
             }
@@ -140,7 +153,8 @@ export default {
         },
         selected() {
             return this.$route.params.selected.split(",");
-        }
+        },
+        
     },
     watch: {
         isModalVisible(newValue, oldValue) {

@@ -72,7 +72,7 @@ export default {
             this.isGenerating = true;
             this.openModal();
             const prompt = PROMPT_ONE(question1, this.question2);
-            this.answer = generateAnswer(prompt).then(async res => {
+            this.answer = generateAnswer(prompt, "1").then(async res => {
                 this.isGenerating = false;
                 this.isGenerated = true;
                 this.$store.dispatch('setDraft1', res);

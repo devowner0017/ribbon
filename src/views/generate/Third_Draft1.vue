@@ -43,7 +43,7 @@
             </div>
             <DisablePanel v-if="isGenerating" />
         </div>
-        <DraftModal :showModal="isModalVisible" @close="closeModal" :isGenerated="isGenerated" />
+        <DraftModal :showModal="isModalVisible" @close="closeModal" id="1" :isGenerated="isGenerated" />
     </div>
 </template>
 <script>
@@ -94,7 +94,7 @@ export default {
                 this.openModal();
                 this.tone = tone;
                 const prompt = PROMPT_TWO(this.$store.state.draft1, this.$store.state.prompt1, tone);
-                this.answer = generateAnswer(prompt).then(res => {
+                this.answer = generateAnswer(prompt, "2").then(res => {
                     this.isGenerating = false;
                     this.$store.dispatch('setDraft2', res);
                     this.$store.dispatch('setPrompt2', prompt);

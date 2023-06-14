@@ -20,8 +20,8 @@
             v-on:update:value="name = $event" />
         <InputGroup placeHolder="Enter your email address" title="Email" :value="email" type="email" :error="errors.email"
             v-on:update:value="email = $event" />
-        <InputGroup placeHolder="Enter your email address" title="Emails to share with(comma separeted)" :value="emails" :error="errors.emails"
-            v-on:update:value="emails = $event"/>
+        <InputGroup placeHolder="Enter your email address" title="Email you want to share tool with" :value="share_email" type="email" :error="errors.share_email"
+            v-on:update:value="share_email = $event"/>
         <div class="d-flex mt-5">
             <SendButton title="share" :isSending="isSending" @click="sendData" :disabled="isDisabled"/>
         </div>
@@ -52,7 +52,7 @@ export default {
             isShareModalVisible: false,
             name: "",
             email: "",
-            emails: "",
+            share_email: "",
             isSending: false,
             snackbar: false,
             errors: {},
@@ -73,9 +73,10 @@ export default {
             this.isShareModalVisible = false;
         },
         sendData() {
-            if (EMAIL_ERRORS(this.email) || NAME_ERRORS(this.name)) {
+            if (EMAIL_ERRORS(this.email) || NAME_ERRORS(this.name)|| EMAIL_ERRORS(this.share_email)) {
                 this.errors.email = EMAIL_ERRORS(this.email);
                 this.errors.name = NAME_ERRORS(this.name);
+                this.errors.share_email = EMAIL_ERRORS(this.share_email);
             } else {
                 this.errors = {};
                 const names = this.name.trim().split(' ');
@@ -83,14 +84,14 @@ export default {
                     email: this.email,
                     firstname: names[0],
                     lastname: names[1],
-                    latest_draft: this.emails,
+                    ai_generator_referrer: this.share_email,
                 }
                 this.isSending = true;
                 sendDataToHubspot(SHARE_EMAIL_ID, data).then(res => {
                     this.closeShareModal();
                     this.email = '';
                     this.name = '';
-                    this.emails = '';
+                    this.share_email = '';
                     this.snackbar = true;
                     this.isSending = false;
                     this.sendError = null;
@@ -103,7 +104,7 @@ export default {
     },
     computed: {
         isDisabled() {
-            return this.email === '' || this.name === '' || this.emails === '';
+            return this.email === '' || this.name === '' || this.share_email === '';
         }
     }
 
