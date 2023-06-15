@@ -20,18 +20,25 @@
             v-on:update:value="name = $event" />
         <InputGroup placeHolder="Enter your email address" title="Email" :value="email" type="email" :error="errors.email"
             v-on:update:value="email = $event" />
-        <InputGroup placeHolder="Enter your email address" title="Email you want to share tool with" :value="share_email" type="email" :error="errors.share_email"
-            v-on:update:value="share_email = $event"/>
+        <InputGroup placeHolder="Enter your email address" title="Email you want to share tool with" :value="share_email"
+            type="email" :error="errors.share_email" v-on:update:value="share_email = $event" />
         <div class="d-flex mt-5">
-            <SendButton title="share" :isSending="isSending" @click="sendData" :disabled="isDisabled"/>
+            <SendButton title="share" :isSending="isSending" @click="sendData" :disabled="isDisabled" />
         </div>
         <div v-if="sendError" class="text-red-500 text-center mt-4">
             {{ sendError }}
         </div>
+        <div class="mt-3 text-color-gray sm-text">
+            By entering your email, you agree to Ribbon Education’s <a
+                href="https://www.ribbonedu.com/terms-and-conditions" target="_blank">terms and conditions</a> and <a
+                href="https://www.ribbonedu.com/privacy-policy" target="_blank">privacy
+                policy</a>.
+        </div>
     </Modal>
     <AboutModal :showModal="isAboutModalVisible" @close="closeAboutModal"></AboutModal>
     <v-snackbar v-model="snackbar" :timeout="3000">
-        <div class="flex items-center"><img src="/images/check.svg" class="mr-2" alt="check" /> <span>Thanks, sent!</span></div>
+        <div class="flex items-center"><img src="/images/check.svg" class="mr-2" alt="check" /> <span>Thanks, sent!</span>
+        </div>
     </v-snackbar>
 </template>
 <script>
@@ -73,7 +80,7 @@ export default {
             this.isShareModalVisible = false;
         },
         sendData() {
-            if (EMAIL_ERRORS(this.email) || NAME_ERRORS(this.name)|| EMAIL_ERRORS(this.share_email)) {
+            if (EMAIL_ERRORS(this.email) || NAME_ERRORS(this.name) || EMAIL_ERRORS(this.share_email)) {
                 this.errors.email = EMAIL_ERRORS(this.email);
                 this.errors.name = NAME_ERRORS(this.name);
                 this.errors.share_email = EMAIL_ERRORS(this.share_email);
@@ -113,4 +120,17 @@ export default {
 </script>
 <style scoped lang="scss">
 @import "@/assets/styles/main.scss";
+
+.sm-text {
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    a {
+        text-decoration: solid !important;
+        text-decoration-line: underline !important;
+    }
+
+}
 </style>

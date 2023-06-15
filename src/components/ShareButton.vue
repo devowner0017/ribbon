@@ -11,6 +11,12 @@
         <div v-if="sendError" class="text-red-500 text-center mt-4">
             {{ sendError }}
         </div>
+        <div class="mt-3 text-color-gray sm-text">
+            By entering your email, you agree to Ribbon Education’s <a href="https://www.ribbonedu.com/terms-and-conditions"
+                target="_blank">terms and conditions</a> and <a href="https://www.ribbonedu.com/privacy-policy"
+                target="_blank">privacy
+                policy</a>.
+        </div>
     </Modal>
     <v-snackbar v-model="snackbar" :timeout="3000">
         <div class="flex items-center"><img src="/images/check.svg" class="mr-2" alt="check" /> <span>Draft has been sent to
@@ -93,4 +99,16 @@ export default {
 </script>
 <style scoped lang="scss">
 @import "@/assets/styles/main.scss";
+.sm-text {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 16px;
+        a {
+            text-decoration: solid !important;
+            text-decoration-line: underline !important;
+        }
+
+    }
 </style>

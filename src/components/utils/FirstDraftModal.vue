@@ -5,7 +5,7 @@
             <div class="input-modal modal-wrapper">
                 <div class="modal">
                     <div v-if="!isGenerated" class="flex justify-center items-center md:m-14 sm:m-4 m-4">
-                        <v-progress-circular  :size="32" :width="7" color="white"
+                        <v-progress-circular :size="32" :width="7" color="white"
                             :indeterminate="!isGenerated"></v-progress-circular>
                     </div>
                     <div class="modal-title title-text title-text-sm">
@@ -30,8 +30,10 @@
                                 later</button>
                         </div>
                         <div class="mt-3 text-color-gray sm-text">
-                            By entering your email, you agree to Ribbon Education’s terms and conditions and privacy
-                            policy.
+                            By entering your email, you agree to Ribbon Education’s <a
+                                href="https://www.ribbonedu.com/terms-and-conditions" target="_blank">terms and conditions</a> and <a
+                                href="https://www.ribbonedu.com/privacy-policy" target="_blank">privacy
+                                policy</a>.
                         </div>
                     </div>
                 </div>
@@ -224,6 +226,11 @@ export default {
         font-weight: 400;
         font-size: 12px;
         line-height: 16px;
+        a {
+            text-decoration: solid !important;
+            text-decoration-line: underline !important;
+        }
+
     }
 
 }

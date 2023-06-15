@@ -102,7 +102,7 @@ export default {
                     <div class="modal-content content-text">
                         <div class="grid grid-cols-1 w-full gap-2">
                             <div class="text-color-primary text-small">
-                                AI PROMPT Tip #{{ currentPage }}
+                                AI PROMPT TIP #{{ currentPage }}
                             </div>
                             <div class="text-main-content title-text title-text-sm"><b>{{ currentHeadline
                             }}</b></div>
