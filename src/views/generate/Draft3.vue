@@ -88,7 +88,6 @@ export default {
             }
         },
         convertSelected(select) {
-           console.log(select)
             if(select.trim()==='Recent travel') {
                 return 'had a recent travel';
             } else if(select.trim()==='Caretaker') {

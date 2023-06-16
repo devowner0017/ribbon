@@ -7,9 +7,9 @@ export const PROFESSIONAL = 'Professional';
 export const SUPPORTIVE = 'Supportive';
 export const UPBEAT = 'Upbeat';
 //----------selection---------------------------------------------
-export const HOLD_A_JOB = 'Also holds a job';
-export const CARETAKER = 'Also is a caretaker';
-export const RECENT_ILLNESS = 'Had an illness recently';
+export const HOLD_A_JOB = 'also holds a job';
+export const CARETAKER = 'also is a caretaker';
+export const RECENT_ILLNESS = 'had an illness recently';
 export const RECENT_TRAVEL = 'Was travelling recently'
 export const TOOK_TIME_OFF = 'Recently took time off';
 //-----------Prompt 1------------------------------------------------------
@@ -47,9 +47,8 @@ export const PROMPT_TWO = (draft, beforePrompt, tone) => {
 }
 //--------------------------------------------------------------------------------
 export const PROMPT_THREE = (draft, beforePrompt, selection) => {
-    let prompt = `${draft}\n This email is created by the prompt "${beforePrompt}". Update the above email by knowing information such as `;
-    selection.forEach(item => prompt += `"${item}", `);
-    prompt += " about the learner. And Don't remove the subject.";
+    let prompt = `${draft}\n This email is created by the prompt "${beforePrompt}". Update the above email by knowing information such 
+    as "${selection}" about the learner. And Don't remove the subject.`;
     return prompt;
 }
 //--------------------------------------------------------------------------------

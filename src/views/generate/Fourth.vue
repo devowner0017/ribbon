@@ -39,8 +39,8 @@
                 </div>
                 <div class="grid w-full grid-cols-1">
                     <div class="grid w-fill grid-cols-3">
-                        <CheckCard text="holds a job" :isSelected="selected.includes('Hold a job')"
-                            :disabled="otherCardDisabled" @click="select('Hold a job')" />
+                        <CheckCard text="holds a job" :isSelected="selected.includes('Holds a job')"
+                            :disabled="otherCardDisabled" @click="select('Holds a job')" />
                         <CheckCard text="caretaker" :isSelected="selected.includes('Caretaker')"
                             :disabled="otherCardDisabled" @click="select('Caretaker')" />
                         <CheckCard text="recent illness" :isSelected="selected.includes('Recent illness')"
@@ -113,6 +113,38 @@ export default {
                 }
             }
         },
+        ////////////////////
+        convertSelected(select) {
+            if(select.trim()==='Recent travel') {
+                return RECENT_TRAVEL;
+            } else if(select.trim()==='Caretaker') {
+                return CARETAKER;
+            } else if(select.trim()==='Holds a job') {
+                return HOLD_A_JOB;
+            } else if(select.trim()==='Recent illness') {
+                return RECENT_ILLNESS;
+            } else if(select.trim()==='Took time off') {
+                return TOOK_TIME_OFF;
+            } 
+        },
+        selectedQuery() {
+            let question4 = "";
+            for (let i = 0; i < this.selected.length; i++) {
+                if (this.selected.length < 2) {
+                    question4 +=  this.convertSelected(this.selected[i]);
+                } else {
+                    if (i < this.selected.length - 2) {
+                        question4 += this.convertSelected(this.selected[i]) + ", "
+                    } else if (i == this.selected.length - 2) {
+                        question4 += this.convertSelected(this.selected[i]) + " and "
+                    } else {
+                        question4 += this.convertSelected(this.selected[i]);
+                    }
+                }
+            }
+            return question4;
+        },
+        /////////////
         openModal() {
             this.isModalVisible = true;
         },
@@ -147,7 +179,7 @@ export default {
             this.isGenerating = true;
             if (this.noApplyDisabled) {
                 this.openModal();
-                const prompt = PROMPT_THREE(this.$store.state.draft2, this.$store.state.prompt2, this.selected);
+                const prompt = PROMPT_THREE(this.$store.state.draft2, this.$store.state.prompt2, this.selectedQuery());
                 let _selected = "";
                 for (let i = 0; i < this.selected.length; i++) {
                     if (this.selected.length < 2) {
