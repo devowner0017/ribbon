@@ -447,8 +447,7 @@
   border: 1px solid #d2caca;
   border-radius: 8px;
   height: 200px;
-  word-wrap: break-word;
-  word-break: break-all;
+  word-wrap: break-word!important;
   box-shadow: 0 0 0 2px $primaryColor;
 }
 

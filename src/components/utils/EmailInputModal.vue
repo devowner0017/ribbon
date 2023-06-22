@@ -41,7 +41,7 @@ export default {
 </script>
 <template>
   <div :class="{ 'hidden': !showModal}">
-    <div class="fixed w-screen h-screen left-0 top-0 modal-background">
+    <div class="fixed w-full h-screen left-0 top-0 modal-background">
       <div class="absolute w-full h-full" @click="closeDialog"></div>
       <div class="input-modal modal-wrapper">
         <div class="modal">
@@ -74,7 +74,7 @@ export default {
     width:100% !important;
    }
    .input-modal {
-    padding:0 50px 0px 50px !important
+    padding:0 20px 0px 20px !important
    }
 }
 .modal-background {

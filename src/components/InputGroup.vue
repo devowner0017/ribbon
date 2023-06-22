@@ -1,8 +1,8 @@
 <template>
-    <div class="w-full my-3">
+    <div class="w-full md:my-3 sm:my-2 my-2 ">
         <span :class="['label-text', {'error-text':isError}]">{{ title }}</span>
-        <input :type="type" :value="value" :placeholder="placeHolder" :class="['w-full input-text input-text-sm mt-2',{'error-border': isError}]" :disabled="disabled"  v-model="model" @input="updateValue" />
-        <span v-if="isError" class="label-text error-text mt-2">{{ error }}</span>
+        <input :type="type" :value="value" :placeholder="placeHolder" :class="['w-full input-text input-text-sm md:mt-2 sm:mt-1 mt-1',{'error-border': isError}]" :disabled="disabled"  v-model="model" @input="updateValue" />
+        <span v-if="isError" class="label-text error-text md:mt-2 sm:mt-1 mt-1">{{ error }}</span>
     </div>
 </template>
 <script>

@@ -20,17 +20,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="md:pb-0">
+                <div class="md:pb-0 sm:pb-3 pb-3">
                 {{
                     this.content
                 }}</div>
             </div>
-            <div class="w-full h-full">
+            <!-- <div class="w-full h-full">
                 <div class="paper-piece-1"></div>
                 <div class="paper-piece-2"></div>
                 <div class="paper-piece-3" ref="piece"></div>
                 <div v-for="i in piece_count" class="paper-piece-3"> </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>

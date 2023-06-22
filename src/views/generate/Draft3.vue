@@ -4,8 +4,11 @@
         <div class="w-full flex grow grid md:grid-cols-2 sm:gird-cols-1 ">
             <div class="relative md:flex flex-col grow w-full justify-center items-center hidden">
                 <div class="form-content form-content-md form-content-sd form-content-sm">
-                    <div class="text-main-content mb-4 w-full">The messaging has been updated for a learner who <b
+                    <div v-if="selected[0]!=='noApply'" class="text-main-content mb-4 w-full">The messaging has been updated for a learner who <b
                             class="text-color-primary">{{ selectedQuery() }}.</b>
+                    </div>
+                    <div v-if="selected[0]==='noApply'" class="text-main-content mb-4 w-full">
+                        ChatGPT is great at giving you more options. Would you like to see a few alternatives?
                     </div>
                     <div class="flex flex-col justify-center">
                         <Button class="btn-primary mb-2" :onClick="onNextPage">
@@ -16,14 +19,17 @@
                 </div>
             </div>
             <div v-if="!isGenerating" class="primary-panel primary-panel-md primary-panel-sd primary-panel-sm">
-                <Paper :content="draft" draftNum="3" :mode="mode" :subject="subject" :selected="selected" />
+                <Paper :content="draft" :draftNum="selected[0]==='noApply'?'2':'3'" :mode="mode" :subject="subject" :selected="selected[0]==='noApply'? [] :selected" />
             </div>
             <LoadingPanel v-if="isGenerating" :indeterminate="isGenerating && !isModalVisible" />
         </div>
         <div class=" md:hidden sm:block w-full absolue bottom-0 z-50">
             <div class="sm-tool-bar ">
-                <div class="text-main-content mb-4">The messaging has been updated for a learner who <b
+                <div  v-if="selected[0]!=='noApply'" class="text-main-content mb-4">The messaging has been updated for a learner who <b
                         class="text-color-primary">{{ selectedQuery() }}.</b>
+                </div>
+                <div  v-if="selected[0]==='noApply'" class="text-main-content mb-4">
+                    ChatGPT is great at giving you more options. Would you like to see a few alternatives?
                 </div>
                 <div class="grid w-full grid-cols-1">
                     <div class="flex flex-col justify-center">

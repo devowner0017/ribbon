@@ -5,13 +5,13 @@
     <Modal :showModal="isModalVisible" @close="closeModal" title="Send yourself this draft">
         <InputGroup placeHolder="Enter your email address" :value="email" type="email" title="Email" :error="errors.email"
             v-on:update:value="email = $event" />
-        <div class="d-flex mt-">
+        <div class="d-flex">
             <SendButton :isSending="isSending" @click="sendData" :disabled="isDisabled" />
         </div>
         <div v-if="sendError" class="text-red-500 text-center mt-4">
             {{ sendError }}
         </div>
-        <div class="mt-3 text-color-gray sm-text">
+        <div class="md:mt-3 sm:mt-2 mt-2 text-color-gray sm-text">
             By entering your email, you agree to Ribbon Education’s <a href="https://www.ribbonedu.com/terms-and-conditions"
                 target="_blank">terms and conditions</a> and <a href="https://www.ribbonedu.com/privacy-policy"
                 target="_blank">privacy

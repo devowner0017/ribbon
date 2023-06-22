@@ -17,7 +17,7 @@ export const  tips = [
     },
     {
         headline: "Get Unstuck",
-        body: "We can often get hung up on a wording or worry about grammar. Try pasting in what you have so far and ask it to “improve"
+        body: "We can often get hung up on a wording or worry about grammar. Try pasting in what you have so far and ask it to “improve my message”."
     },
     {
         headline: "No Expertise Required",

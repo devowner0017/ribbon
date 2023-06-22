@@ -22,13 +22,13 @@
             v-on:update:value="email = $event" />
         <InputGroup placeHolder="Enter your email address" title="Email you want to share tool with" :value="share_email"
             type="email" :error="errors.share_email" v-on:update:value="share_email = $event" />
-        <div class="d-flex mt-5">
+        <div class="d-flex md:mt-5 sm:mt-3 mt-2">
             <SendButton title="share" :isSending="isSending" @click="sendData" :disabled="isDisabled" />
         </div>
-        <div v-if="sendError" class="text-red-500 text-center mt-4">
+        <div v-if="sendError" class="text-red-500 text-center md:mt-4 sm:mt-2 mt-2">
             {{ sendError }}
         </div>
-        <div class="mt-3 text-color-gray sm-text">
+        <div class="md:mt-3 sm:mt-2 mt-2 text-color-gray sm-text">
             By entering your email, you agree to Ribbon Education’s <a
                 href="https://www.ribbonedu.com/terms-and-conditions" target="_blank">terms and conditions</a> and <a
                 href="https://www.ribbonedu.com/privacy-policy" target="_blank">privacy

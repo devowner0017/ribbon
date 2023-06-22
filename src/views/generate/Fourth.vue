@@ -206,22 +206,31 @@ export default {
             } else {
                 this.$store.dispatch('setDraft3', this.$store.state.draft2);
                 this.$store.dispatch('setPrompt3', this.$store.state.prompt2);
-                this.isGenerating = true;
-                this.openModal();
-                generateAnswer(PROMPT_FOUR(this.$store.state.draft2, this.$store.state.prompt2), '4-6').then(res => {
-                    let part = res.split('$');
-                    this.$store.dispatch('setDraft4', part[0]);
-                    let index1 = part[1].indexOf('S');
-                    let index2 = part[2].indexOf('S');
-                    this.$store.dispatch('setDraft5', part[1].slice(index1));
-                    this.$store.dispatch('setDraft6', part[2].slice(index2));
-                    this.isGenerating = false;
-                    this.isGenerated = true;
-                    this.checkNext2()
-                }).catch(err => {
-                    this.isGenerating = false;
-                    console.log(err)
+                // this.isGenerating = true;
+                this.$router.push({
+                    path: `/questions/4/draft3/noApply`,
+                    query: {
+                        question1: this.$route.query.question1,
+                        question2: this.$route.query.question2,
+                        question3: this.$route.query.question3,
+                    }
                 });
+                this.checkNext1();
+                // this.openModal();
+                // generateAnswer(PROMPT_FOUR(this.$store.state.draft2, this.$store.state.prompt2), '4-6').then(res => {
+                //     let part = res.split('$');
+                //     this.$store.dispatch('setDraft4', part[0]);
+                //     let index1 = part[1].indexOf('S');
+                //     let index2 = part[2].indexOf('S');
+                //     this.$store.dispatch('setDraft5', part[1].slice(index1));
+                //     this.$store.dispatch('setDraft6', part[2].slice(index2));
+                //     this.isGenerating = false;
+                //     this.isGenerated = true;
+                //     this.checkNext2()
+                // }).catch(err => {
+                //     this.isGenerating = false;
+                //     console.log(err)
+                // });
             }
         }
 

@@ -89,6 +89,7 @@ export default {
             this.isModalVisible = false;
         },
         makeDraft2(tone) {
+            console.log(tone)
             this.isGenerating = true;     
             if (tone != "looks_good") {
                 this.openModal();
